@@ -23,6 +23,11 @@ h1 {
     font-size: 3em;
     font-family:'Helvetica', 'Courier New', 'Sans-Serif';
 }
+h2{
+    font-size: 2em;
+    font-family:'Courier New', Courier, monospace
+}
+
 p {
     font-size: 1.3em;
     line-height: 1.4em;
