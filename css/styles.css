@@ -38,6 +38,24 @@ footer {
     border-top: 1px solid #d5d5d5;
     font-size: .8em;
 }
+.center{
+  border: 5px solid;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
+
+figcaption{
+    border: 5px solid;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  font-family: 'EB Garamond';font-size: 22px;
+}
 
 ul.posts { 
     margin: 20px auto 40px; 
