@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multistory Floor</title>
+<title>Multistory House</title>
 <style>
     body {
         margin: 0;
@@ -13,37 +13,59 @@
     .floor {
         width: 100%;
         height: 33.33vh; /* Each floor takes up one-third of the viewport height */
-        background-color: #f0f0f0;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     .floor:nth-child(odd) {
-        background-color: #e0e0e0; /* Alternating floor colors for visual appeal */
+        background-color: #f0f0f0; /* Alternating floor colors for visual appeal */
     }
-    .floor-content {
-        text-align: center;
+    .living-room {
+        width: 66.66%;
+        height: 100%;
+        background-color: #c9d6e2; /* Color for the living room */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+    .living-room-description {
+        width: 33.33%;
+        height: 100%;
+        background-color: #fff; /* Color for the description section */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .npc {
+        position: absolute;
+        bottom: 0;
+        right: 10%; /* Adjust the position of the NPC */
+        max-width: 50%; /* Adjust the size of the NPC */
+    }
+    .speech-bubble {
+        position: absolute;
+        bottom: 60%;
+        right: 20%; /* Adjust the position of the speech bubble */
+        max-width: 30%; /* Adjust the size of the speech bubble */
     }
 </style>
 </head>
 <body>
     <div class="floor">
-        <div class="floor-content">
-            <h2>Floor 1</h2>
-            <p>This is the first floor.</p>
+        <div class="living-room">
+            <img src="../images/femalenpc.png" alt="NPC" class="npc">
+            <img src="../images/pixel-speech-bubble.png" alt="Speech Bubble" class="speech-bubble">
+        </div>
+        <div class="living-room-description">
+            <p>This is the living room. It's cozy and well-furnished, perfect for relaxing after a long day.</p>
         </div>
     </div>
     <div class="floor">
-        <div class="floor-content">
-            <h2>Floor 2</h2>
-            <p>This is the second floor.</p>
-        </div>
+        <!-- Second floor content goes here -->
     </div>
     <div class="floor">
-        <div class="floor-content">
-            <h2>Floor 3</h2>
-            <p>This is the third floor.</p>
-        </div>
+        <!-- Third floor content goes here -->
     </div>
 </body>
 </html>
