@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "./NavBar";
-import Intro from "../../Intro";
+import Intro from "./Intro";
 
 
 
