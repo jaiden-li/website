@@ -1,51 +1,190 @@
 
 <!DOCTYPE html>
-<html>
- <head>
-   <title>☾</title>
-   <link rel="stylesheet" href="css/styles.css">
-   <link rel="icon" href="images/rose.gif">
-   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet"> 
-   <style>
-   h2 {
-    font-family: 'JetBrains Mono';font-size: 22px;
-   }
-   img { 
-    border-radius: 50%;   
-    } 
-  </style>
- </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/beamline_logo.png">
+    <title>SPEEDers</title>
 
- <body style="background-color: #a6c3cf;">
-   <nav>
-     <ul> 
-       <li><a href=#top>Home</a></li>
-       <li><a href="/pages/linguistics.html">Linguistics</a></li>
-       <li><a href="/pages/writing.html">Writing</a></li>
-       <li><a href="/pages/code.html">Code</a></li>
-       <li><a href="/pages/blogs/blog.html">Blog</a></li>
-       <li><a href="/pages/saints.html">Confessions Before Sainthood</a></li>
-     </ul>
-   </nav>
-   <div class=”container”>
-     <div class=”blurb”>
-       <h1><u>h</u>i, i'<u>m</u> jaide<u>n</u>!</h1>
-      <div style="display:inline;">
-        <span><p><a href=https://github.com/jaiden-li><img src ="images/github logo.png" width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></a></p></span>
-      </div>
-        <h2>'programmic' linguistics nut. writer with a heart of gold. coined the phrase 'manic pixie dream girl' in another life, probably. </h2>
-        <p>do first, think later.</p>
-          <img class="square" src="images/jaiden.png" alt="" width="200px">
-     </div>
-   </div>
-      <figure>
-        <img class="square" src="images/dreams.png"  width="1000px">
-        <figcaption>for the dreamer, there is no sleep.</figcaption>
-      </figure>
-   <footer>
-   <ul>
-     <li><a href=mailto:dreampenjaiden@gmail.com>Email Me!</a></li>
-   </ul>
-   </footer>
- </body>
+    <!-- Link to Google Fonts for Custom Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=EB+Garamond&display=swap" rel="stylesheet">
+
+    <!-- Internal CSS -->
+    <style>
+        /* Global Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-image: url('images/beamline.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+        /* Container for the content */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Tab navigation */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 30px;
+            margin: 0 10px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.295);
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab:hover {
+            background-color: rgba(255, 255, 255, 0.153);
+        }
+
+        /* Active tab styling */
+        .tab.active {
+            background-color: rgba(255, 255, 255, 0.836);
+            color: white;
+        }
+
+        /* Tab content */
+        .team {
+            text-align: center;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.057);
+            padding: 50px;
+            border-radius: 15px;
+            font-size: 7em;
+        }
+
+        .tab-content {
+            text-align: center;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.057);
+            padding: 50px;
+            border-radius: 15px;
+            display: none;
+        }
+
+        .h1{
+            font-size: 7em;
+        }
+
+        /* Blog Entry Box */
+        .blog-entry {
+            font-family: 'EB Garamond', serif;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .blog-entry h2 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+        }
+
+        .blog-entry .meta {
+            font-size: 0.9em;
+            color: gray;
+        }
+
+        .blog-entry p {
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active" onclick="showContent('home')">Home</div>
+            <div class="tab" onclick="showContent('about')">About Us</div>
+            <div class="tab" onclick="showContent('blog')">Blog</div>
+            <div class="tab" onclick="showContent('photos')">Photo Gallery</div>
+        </div>
+
+        <!-- Tab content -->
+        <div id="home" class="team">
+            <br></br>
+            <h1>SPEEDers</h1>
+        </div>
+
+        <div id="about" class="tab-content">
+            <h1>About Us</h1>
+            <p>Coming Soon!</p>
+        </div>
+
+        <div id="blog" class="tab-content">
+            <h1>Blog</h1>
+            <div class="blog-entry">
+                <h2>Fritz Cola is the Source of Insomnia</h2>
+                <div class="meta">By Everyone | September 19, 2024</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vehicula velit sit amet eros fermentum, sit amet mollis ipsum fermentum...</p>
+            </div>
+            <div class="blog-entry">
+                <h2>Placeholder</h2>
+                <div class="meta">By Jaiden Li | September 18, 2024</div>
+                <p>Vestibulum in mauris a elit commodo vehicula. Nullam id nibh eget risus efficitur dignissim. Cras euismod, magna et facilisis laoreet...</p>
+            </div>
+            <div class="blog-entry">
+                <h2>Placeholder</h2>
+                <div class="meta"> | September 15, 2024</div>
+                <p>Nam ac magna nec velit tempus sollicitudin. Suspendisse consectetur, augue at gravida dignissim, felis est tristique libero...</p>
+            </div>
+        </div>
+
+        <div id="photos" class="tab-content">
+            <h1>Photo Gallery</h1>
+            <p>Check out our photos!</p>
+        </div>
+    </div>
+
+    <script>
+        function showContent(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                if (tab.textContent.toLowerCase() === tabName) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+
+            contents.forEach(content => {
+                if (content.id === tabName) {
+                    content.style.display = 'block';
+                } else {
+                    content.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
 </html>
