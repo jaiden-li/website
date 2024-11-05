@@ -10,30 +10,38 @@
             <link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet'>
             <style>
 
-                /* Updated styles for the section */
 section {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Adjust spacing between items */
+  gap: 20px;
   padding: 10px 0;
+  justify-content: space-between;
 }
 
-/* Portfolio entry styles */
 .portfolio-entry {
-  flex: 1 1 calc(33.333% - 20px); /* Three items per row with equal spacing */
+  flex: 1 1 calc(33.333% - 20px); 
   background-color: rgb(255, 255, 206);
   border: 2px solid #ddd;
   border-radius: 15px;
   padding: 15px;
   box-sizing: border-box;
-  min-width: 250px; /* Ensures items don't shrink too much */
+  min-width: 250px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; 
+}
+
+.portfolio-entry p {
+  flex-grow: 1; 
 }
 
 @media (max-width: 768px) {
   .portfolio-entry {
-    flex: 1 1 100%; /* Stack items on smaller screens */
+    flex: 1 1 100%; 
   }
 }
+
 
 
             
