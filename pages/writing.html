@@ -9,6 +9,32 @@
             <link href='https://fonts.googleapis.com/css?family=Love Ya Like A Sister' rel='stylesheet'>
             <link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet'>
             <style>
+section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  justify-content: flex-start; 
+  padding: 10px 0;
+}
+
+.portfolio-entry {
+  flex: 1 1 calc(30% - 20px); 
+  max-width: 30%;
+  background-color: rgb(255, 255, 206);
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  margin: 0; 
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .portfolio-entry {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
             
             h2 {
                 font-family: 'Love Ya Like A Sister';font-size: 22px;
@@ -29,17 +55,7 @@
                 font-family: "Loved by the King"; font-size: 30px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; 
                 text-align: center;
             }
-          
-              .portfolio-entry {
-                width: 30%;
-                background-color: rgb(255, 255, 206);
-                border: 2px solid #ddd;
-                border-radius: 15px;
-                margin: 20px;
-                padding: 15px;
-                box-sizing: border-box;
-              }
-          
+        
               p {
                 color: #666;
               }
