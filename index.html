@@ -1,51 +1,85 @@
-
 <!DOCTYPE html>
 <html>
- <head>
-   <title>☾</title>
-   <link rel="stylesheet" href="css/styles.css">
-   <link rel="icon" href="images/rose.gif">
-   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet"> 
-   <style>
-   h2 {
-    font-family: 'JetBrains Mono';font-size: 22px;
-   }
-   img { 
-    border-radius: 50%;   
-    } 
+<head>
+  <title>☾</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/rose.gif">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    h2 {
+      font-family: 'JetBrains Mono';
+      font-size: 22px;
+    }
+    img {
+      border-radius: 50%;
+    }
+    .cloud-blurb {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #fff;
+      border-radius: 50px;
+      padding: 10px 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+      text-decoration: none;
+    }
+    .cloud-blurb::after, .cloud-blurb::before {
+      content: '';
+      position: absolute;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+    .cloud-blurb::after {
+      width: 20px;
+      height: 20px;
+      top: -10px;
+      left: 10px;
+    }
+    .cloud-blurb::before {
+      width: 30px;
+      height: 30px;
+      top: -15px;
+      right: 10px;
+    }
   </style>
- </head>
-
- <body style="background-color: #a6c3cf;">
-   <nav>
-     <ul> 
-       <li><a href=#top>Home</a></li>
-       <li><a href="/pages/linguistics.html">Linguistics</a></li>
-       <li><a href="/pages/writing.html">Writing</a></li>
-       <li><a href="/pages/code.html">Code</a></li>
-       <li><a href="/pages/blogs/blog.html">Blog</a></li>
-       <li><a href="/pages/saints.html">Confessions Before Sainthood</a></li>
-     </ul>
-   </nav>
-   <div class=”container”>
-     <div class=”blurb”>
-       <h1><u>h</u>i, i'<u>m</u> jaide<u>n</u>!</h1>
+</head>
+<body style="background-color: #a6c3cf;">
+  <nav>
+    <ul>
+      <li><a href=#top>Home</a></li>
+      <li><a href="/pages/linguistics.html">Linguistics</a></li>
+      <li><a href="/pages/writing.html">Writing</a></li>
+      <li><a href="/pages/code.html">Code</a></li>
+      <li><a href="/pages/blogs/blog.html">Blog</a></li>
+      <li><a href="/pages/saints.html">Confessions Before Sainthood</a></li>
+    </ul>
+  </nav>
+  <div class="cloud-blurb">
+    <a href="/pages/blogs/blog.html">Latest Blog Post!</a>
+  </div>
+  <div class="container">
+    <div class="blurb">
+      <h1><u>h</u>i, i'<u>m</u> jaide<u>n</u>!</h1>
       <div style="display:inline;">
-        <span><p><a href=https://github.com/jaiden-li><img src ="images/github logo.png" width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></a></p></span>
+        <span><p><a href="https://github.com/jaiden-li"><img src="images/github logo.png" width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></a></p></span>
       </div>
-        <h2>'programmic' linguistics nut. writer with a heart of gold. coined the phrase 'manic pixie dream girl' in another life, probably. </h2>
-        <p>do first, think later.</p>
-          <img class="square" src="images/jaiden.png" alt="" width="200px">
-     </div>
-   </div>
-      <figure>
-        <img class="square" src="images/dreams.png"  width="1000px">
-        <figcaption>for the dreamer, there is no sleep.</figcaption>
-      </figure>
-   <footer>
-   <ul>
-     <li><a href=mailto:dreampenjaiden@gmail.com>Email Me!</a></li>
-   </ul>
-   </footer>
- </body>
+      <h2>'programmic' linguistics nut. writer with a heart of gold. coined the phrase 'manic pixie dream girl' in another life, probably. </h2>
+      <p>do first, think later.</p>
+      <img class="square" src="images/jaiden.png" alt="" width="200px">
+    </div>
+  </div>
+  <figure>
+    <img class="square" src="images/dreams.png" width="1000px">
+    <figcaption>for the dreamer, there is no sleep.</figcaption>
+  </figure>
+  <footer>
+    <ul>
+      <li><a href="mailto:dreampenjaiden@gmail.com">Email Me!</a></li>
+    </ul>
+  </footer>
+</body>
 </html>
