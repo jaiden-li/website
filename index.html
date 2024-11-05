@@ -14,31 +14,41 @@
       border-radius: 50%;
     }
     .cloud-blurb {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: #fff;
-      border-radius: 50px;
-      padding: 10px 20px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 16px;
-      color: #000;
-      text-align: center;
-      text-decoration: none;
-    }
-    .cloud-blurb::after, .cloud-blurb::before {
-      content: '';
-      position: absolute;
-      background-color: #fff;
-      border-radius: 50%;
-    }
-    .cloud-blurb::after {
-      width: 20px;
-      height: 20px;
-      top: -10px;
-      left: 10px;
-    }
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #e0f7fa; /* A light cyan for contrast */
+  border-radius: 50px;
+  padding: 10px 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  color: #005662; /* A darker teal color for better readability */
+  text-align: center;
+  text-decoration: none;
+}
+
+.cloud-blurb::after, .cloud-blurb::before {
+  content: '';
+  position: absolute;
+  background-color: #e0f7fa; /* Same background color as the main cloud */
+  border-radius: 50%;
+}
+
+.cloud-blurb::after {
+  width: 20px;
+  height: 20px;
+  top: -10px;
+  left: 10px;
+}
+
+.cloud-blurb::before {
+  width: 30px;
+  height: 30px;
+  top: -15px;
+  right: 10px;
+}
+
     .cloud-blurb::before {
       width: 30px;
       height: 30px;
