@@ -13,37 +13,28 @@
 section {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 20px; 
+  justify-content: flex-start; 
   padding: 10px 0;
-  justify-content: space-between;
 }
 
 .portfolio-entry {
-  flex: 1 1 calc(33.333% - 20px); 
+  flex: 1 1 calc(30% - 20px); 
+  max-width: 30%;
   background-color: rgb(255, 255, 206);
   border: 2px solid #ddd;
   border-radius: 15px;
+  margin: 0; 
   padding: 15px;
   box-sizing: border-box;
-  min-width: 250px; 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%; 
-}
-
-.portfolio-entry p {
-  flex-grow: 1; 
 }
 
 @media (max-width: 768px) {
   .portfolio-entry {
-    flex: 1 1 100%; 
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 }
-
-
-
             
             h2 {
                 font-family: 'Love Ya Like A Sister';font-size: 22px;
