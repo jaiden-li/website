@@ -9,31 +9,32 @@
             <link href='https://fonts.googleapis.com/css?family=Love Ya Like A Sister' rel='stylesheet'>
             <link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet'>
             <style>
+
+                /* Updated styles for the section */
 section {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; 
-  justify-content: flex-start; 
+  gap: 20px; /* Adjust spacing between items */
   padding: 10px 0;
 }
 
+/* Portfolio entry styles */
 .portfolio-entry {
-  flex: 1 1 calc(30% - 20px); 
-  max-width: 30%;
+  flex: 1 1 calc(33.333% - 20px); /* Three items per row with equal spacing */
   background-color: rgb(255, 255, 206);
   border: 2px solid #ddd;
   border-radius: 15px;
-  margin: 0; 
   padding: 15px;
   box-sizing: border-box;
+  min-width: 250px; /* Ensures items don't shrink too much */
 }
 
 @media (max-width: 768px) {
   .portfolio-entry {
-    flex: 1 1 100%;
-    max-width: 100%;
+    flex: 1 1 100%; /* Stack items on smaller screens */
   }
 }
+
 
             
             h2 {
