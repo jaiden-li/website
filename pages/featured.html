@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/jaiden.png">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">  
+    <title>Featured</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
+
+        .image-section {
+            width: 25%;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .image-section img {
+            max-width: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .board-section {
+            width: 75%;
+            background-color: #fff;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            overflow-y: auto;
+        }
+
+        .sticky-note {
+            background-color: #ffeaa7;
+            border: 2px solid #dfe6e9;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin: 10px;
+            width: calc(30% - 20px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sticky-note h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .sticky-note p {
+            margin: 10px 0 0;
+            font-size: 0.9em;
+        }
+
+        .sticky-note a {
+            color: #0984e3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .sticky-note a:hover {
+            text-decoration: underline;
+        }
+
+        .sticky-note .date {
+            font-size: 0.8em;
+            color: #636e72;
+        }
+
+        @media (max-width: 768px) {
+            .image-section {
+                display: none;
+            }
+
+            .board-section {
+                width: 100%;
+            }
+
+            .sticky-note {
+                width: calc(45% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="image-section">
+        <img src="your-image.jpg" alt="Your Picture">
+    </div>
+    <div class="board-section">
+        <div class="sticky-note">
+            <h3>Article Title 1</h3>
+            <span class="date">January 15, 2025</span>
+            <p>Short excerpt or description of the article...</p>
+            <a href="#">Read more</a>
+        </div>
+
+        <div class="sticky-note">
+            <h3>Article Title 2</h3>
+            <span class="date">February 1, 2025</span>
+            <p>Short excerpt or description of the article...</p>
+            <a href="#">Read more</a>
+        </div>
+
+        <div class="sticky-note">
+            <h3>Article Title 3</h3>
+            <span class="date">March 10, 2025</span>
+            <p>Short excerpt or description of the article...</p>
+            <a href="#">Read more</a>
+        </div>
+
+    </div>
+</body>
+</html>
