@@ -55,6 +55,13 @@
       background-color: #a6c3cf;
     }
 
+    .container {
+      display: flex;
+      align-items: center; 
+      gap: 20px; 
+      margin: 50px auto;
+    }
+
     .terminal {
       background-color: #1e1e1e;
       color: #ffffff;
@@ -62,8 +69,7 @@
       font-size: 16px;
       padding: 20px;
       border-radius: 10px;
-      width: 80%;
-      margin: 50px auto;
+      width: 70%; 
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     }
 
@@ -88,22 +94,11 @@
     <a href="/pages/blogs/mit.html">Latest Blog Post!</a>
   </div>
   <div class="container">
-    <div class="blurb">
-      <h1><u>h</u>i, i'<u>m</u> jaide<u>n</u>!</h1>
-      <div style="display:inline;">
-        <span><p><a href="https://github.com/jaiden-li"><img src="images/github logo.png" width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></a></p></span>
-      </div>
-      <h2>'programmic' linguistics nut. writer with a heart of gold. coined the phrase 'manic pixie dream girl' in another life, probably. </h2>
-      <p>do first, think later.</p>
-      <img class="square" src="images/jaiden.png" alt="" width="200px">
+    <img class="square" src="images/jaiden.png" alt="" width="200px">
+    <div class="terminal">
+      <div class="terminal-text" id="terminal-text"></div>
     </div>
   </div>
-  <div class="terminal">
-    <div class="terminal-text" id="terminal-text"></div>
-  </div>
-  <figure>
-    <img class="square" src="images/dreams.png" width="1000px">
-  </figure>
   <footer>
     <ul>
       <li><a href="mailto:dreampenjaiden@gmail.com">Email Me!</a></li>
