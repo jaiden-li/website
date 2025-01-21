@@ -1,60 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="../images/jaiden.png">
-  <title>Code Projects</title>
-  <link rel="stylesheet" href="styles2.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="../images/jaiden.png">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>Featured</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #a6c3cf;
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
+
+        .image-section {
+            width: 25%;
+            background-color: #1e1e1e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 5px solid #1e1e1e;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .board-section {
+            width: 75%;
+            background: linear-gradient(to bottom, #e0f7fa, #b3e5fc);
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            overflow-y: auto;
+        }
+
+        .sticky-note {
+            background-color: #ffeaa7;
+            border: 2px solid #dfe6e9;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin: 10px;
+            width: calc(30% - 20px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sticky-note h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .sticky-note p {
+            margin: 10px 0 0;
+            font-size: 0.9em;
+        }
+
+        .sticky-note a {
+            color: #0984e3;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .sticky-note a:hover {
+            text-decoration: underline;
+        }
+
+        .sticky-note .date {
+            font-size: 0.8em;
+            color: #636e72;
+        }
+
+        @media (max-width: 768px) {
+            .image-section {
+                display: none;
+            }
+
+            .board-section {
+                width: 100%;
+            }
+
+            .sticky-note {
+                width: calc(45% - 20px);
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <nav>
-        <ul>
-            <li><a href="#top">Home</a></li>
-            <li><a href="/pages/linguistics.html">Linguistics</a></li>
-            <li><a href="/pages/writing.html">Writing</a></li>
-            <li><a href="/pages/code.html">Code</a></li>
-            <li><a href="/pages/blogs/blog.html">Blog</a></li>
-            <li><a href="/pages/featured.html">Featured</a></li>
-          </ul>
-    </nav>
-  </header>
-
-  <main>
-    <h1>Code Projects</h1>
-    <div class="projects-container">
-      <section id="websites">
-        <h2>Websites</h2>
-        <div class="project-card">
-          <h3>SPEEDers Website</h3>
-          <p>Website for the SPEEDers!</p>
-          <a href="https://bl4s-speeders.github.io/bl4s-speeders/" class="view-demo">View Project</a>
-        </div>
-      </section>
-      
-      <section id="tools">
-        <h2>Tools</h2>
-        <div class="project-card">
-          <h3>VerbalVilla</h3>
-          <p>Created at MIT Blueprint, a language learning tool that uses AI-generated stimuli for conversation practice in foreign languages and provides automatic AI-generated feedback.</p>
-          <a href="#" class="view-demo">View Tool</a>
-        </div>
-      </section>
-      
-      <section id="video-demos">
-        <h2>Video Demos</h2>
-        <div class="project-card">
-          <h3>Machine Learning Demo</h3>
-          <p>A brief walkthrough of my sentiment analysis project using TensorFlow.</p>
-          <a href="#" class="view-demo">Watch Video</a>
-        </div>
-      </section>
+    <div class="image-section">
+        <img src="../images/half.png" alt="Jaiden">
     </div>
-  </main>
-  
-  <footer>
-    <p>&copy; 2025 Your Name</p>
-  </footer>
+    <div class="board-section">
+        <div class="sticky-note">
+            <h3>SPEEDers website</h3>
+            <span class="date">September 2024</span>
+            <p>Website for the SPEEDers (BL4S 2024)!</p>
+            <br>
+            <a href="https://bl4s-speeders.github.io/bl4s-speeders/">Check it out!</a>
+        </div>
+    
+    </div>
 </body>
 </html>
