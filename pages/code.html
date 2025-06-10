@@ -8,15 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
     <title>Code</title>
     <style>
-        body {
-            margin: 0;
-            font-family: 'JetBrains Mono', monospace;
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-            display: flex;
-            flex-direction: row;
-            height: 100vh;
-        }
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    font-family: 'JetBrains Mono', monospace;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
 
         .image-section {
             width: 25%;
@@ -45,6 +46,13 @@
             align-content: flex-start;
             overflow-y: auto;
         }
+
+        .main-content {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    height: 100%;
+}
 
         .sticky-note {
             background-color: #fdf6e3;
@@ -117,20 +125,26 @@
     <div id="navbar-placeholder"></div>
     <script src="/navbar.js"></script>
 
-    <div class="board-section">
-        <div class="sticky-note">
-            <h3>SPEEDers website</h3>
-            <span class="date">September 2024</span>
-            <p>Website for the SPEEDers, our Beamline For Schools 2024 team. Make sure to check out our blog!</p>
-            <a href="https://bl4s-speeders.github.io/bl4s-speeders/" target="_blank">Check it out!</a>
-        </div>
+    <div class="main-content">
+        <div class="board-section">
+            <div class="sticky-note">
+                <h3>SPEEDers website</h3>
+                <span class="date">September 2024</span>
+                <p>Website for the SPEEDers, our Beamline For Schools 2024 team. Make sure to check out our blog!</p>
+                <a href="https://bl4s-speeders.github.io/bl4s-speeders/" target="_blank">Check it out!</a>
+            </div>
 
-        <div class="sticky-note">
-            <h3>VerbalVilla</h3>
-            <span class="date">March 2024</span>
-            <p>An AI-powered language learning app made for MIT Blueprint 2024. </p>
-            <iframe width="100%" height="215" src="https://www.youtube.com/embed/7mI1psWKDcU?si=nW7L9H_O3WM8MVI6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            <a href="https://0238-18-29-49-127.ngrok-free.app/" target="_blank">Check it out!</a>
+            <div class="sticky-note">
+                <h3>VerbalVilla</h3>
+                <span class="date">March 2024</span>
+                <p>An AI-powered language learning app made for MIT Blueprint 2024.</p>
+                <iframe width="100%" height="215" src="https://www.youtube.com/embed/7mI1psWKDcU?si=nW7L9H_O3WM8MVI6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <a href="https://0238-18-29-49-127.ngrok-free.app/" target="_blank">Check it out!</a>
+            </div>
+
+            <div class="sticky-note">
+                <h3>AI Policy Translator & Contextualizer</h3>
+            </div>
         </div>
 
 
