@@ -6,53 +6,40 @@
   <link rel="icon" href="../images/jaiden.png">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
   <style>
-    h2 {
-      font-family: 'JetBrains Mono';
-      font-size: 22px;
-    }
-
-    img {
-      border-radius: 50%;
-    }
-
-    .cloud-blurb {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: linear-gradient(to bottom, #e0f7fa, #b3e5fc);
-      border-radius: 50px;
-      padding: 10px 20px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 16px;
-      color: #03141a;
-      text-align: center;
-      text-decoration: none;
-      /* position: relative; */
-    }
-
-    .cloud-blurb a {
-      text-decoration: none;
-      color: #03141a;
-    }
-
     body {
       background-color: #a6c3cf;
+      font-family: 'JetBrains Mono', monospace;
+      margin: 0;
+      padding: 0;
     }
 
     .content {
-      max-width: 1000px;
-      margin: 50px auto;
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 0 20px;
+      line-height: 1.75;
+      color: #1e1e1e;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
     }
 
-    .blurb {
+    h2 {
+      font-size: 24px;
+      color: #03141a;
+      border-bottom: 2px solid #1e1e1e;
+      padding-bottom: 4px;
+      margin-top: 40px;
+    }
+
+    p {
+      font-size: 16px;
       margin-bottom: 20px;
     }
 
-    .image-terminal-container {
-      display: flex;
-      align-items: flex-start;
-      gap: 40px;
+    a {
+      color: #0d3b66;
+      text-decoration: underline;
     }
 
     .terminal {
@@ -62,28 +49,48 @@
       font-size: 16px;
       padding: 20px;
       border-radius: 10px;
-      width: 70%;
+      margin-top: 40px;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      white-space: pre-wrap;
     }
 
-    .terminal-text {
-      white-space: pre-wrap;
-      overflow: hidden;
+    @media (max-width: 600px) {
+      .content {
+        padding: 0 15px;
+      }
     }
   </style>
 </head>
 <body>
   <div id="navbar-placeholder"></div>
   <script src="/navbar.js"></script>
-  <div>
+
+  <div class="content">
+    <h2>Welcome</h2>
     <p>Welcome to my Linguistics research portfolio and project page, where I nerd out about linguistics!</p>
+
+    <h2>Where It All Started</h2>
     <p>My first exposure to formal Linguistics came from attending <a href="https://linguistics.osu.edu/undergrad/sliys">Ohio State's Summer Linguistics for Youth Institute</a> (SLIYS, pronounced "slice") in the summer before my sophomore year. Before then, I'd always been passionate about language, but I had no idea that language could be studied as a science.</p>
-    <p>At SLIYS, I discovered the field of computational linguistics. "If a machine has to do X in order to perform this linguistic task, do humans have to do X as well?" This really fascinated me because - and this will probably seem obvious - human language informs machines, but machines can inform human language as well. I thought about diagnosing the human condition, and how I could do that as a linguist.</p>
-    <p>At the same time, I was also becoming more interested in translation. As I learned Chinese and French in more depth, I would play around with expressing the same sentiment in multiple languages. Some languages like French are really fun for playing around with sense and reference - the word "conscience" in French means "consciousness" and "conscience" - while other languages are much more rigid. While satisfying my own urge for expression, as a translator, I could also help others express their meaning.</p>
-    <p>In my sophomore year, I started taking <a href="https://naclo.org/">NACLO</a> more seriously, studying and doing practice problems leading up to the contest. My efforts paid off - I qualified for the Invitational Round!</p>
-    <p>Sophomore year was also when I started to get more into competitive programming. I especially loved CP problems that involved manipulating strings or that dealt with language in some capacity. However, when talking with my friends back home in China, I realized a lot of them found competitive programming - and programming in general - difficult due to the language barrier. Not only were they learning a whole new language (programming), they were also doing so in English instead of their mother tongue!</p>
-    <p>This was a struggle my dad also faced in his line of work as a clinical analyst. I thought about how I could bridge this gap with my programming and translation experience - creating coding tutorials in other languages? Making a Python preprocessor for Chinese coders? - and eventually settled on translating competitive programming problems into Chinese.</p>
-    <p>That summer, I took a class called Artificial Intelligence, Natural Language Processing, and Semantics with Prof. Mohammed Taher Pilehvar from Cambridge University. Learning about how computers actually processed and "understood" language was so fascinating because of the similarities and differences to humans learning language.</p>
+
+    <h2>Discovering Computational Linguistics</h2>
+    <p>At SLIYS, I discovered the field of computational linguistics. "If a machine has to do X in order to perform this linguistic task, do humans have to do X as well?" This really fascinated me—human language informs machines, but machines can also inform our understanding of human language.</p>
+
+    <h2>Language and Meaning</h2>
+    <p>Meanwhile, I was also becoming more interested in translation. As I learned Chinese and French more deeply, I started experimenting with expressing the same idea in different languages. I especially loved the nuance—like how "conscience" in French means both "consciousness" and "conscience."</p>
+
+    <h2>NACLO & Programming</h2>
+    <p>In my sophomore year, I began taking <a href="https://naclo.org/">NACLO</a> seriously. I studied, practiced, and eventually qualified for the Invitational Round!</p>
+    <p>I also got into competitive programming, especially problems involving strings or language. But when chatting with my friends in China, I realized that programming—in English—was often an extra challenge for them.</p>
+
+    <h2>Bridging Gaps</h2>
+    <p>This was a struggle my dad faced as a clinical analyst. So I thought: how could I help? Tutorials in native languages? A Python preprocessor for Chinese coders? I eventually settled on translating competitive programming problems into Chinese.</p>
+
+    <h2>NLP & the Human Brain</h2>
+    <p>That summer, I took a class on Artificial Intelligence, Natural Language Processing, and Semantics with Prof. Mohammed Taher Pilehvar from Cambridge.</p>
+
+    <div class="terminal">
+      > echo "
+    </div>
   </div>
 </body>
 </html>
