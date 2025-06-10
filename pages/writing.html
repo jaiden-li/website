@@ -124,6 +124,21 @@
         width: 95%;
       }
     }
+
+    #goodreads-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1001;
+  opacity: 0.6;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+#goodreads-icon:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
   </style>
 </head>
 <body>
@@ -261,5 +276,12 @@
       }
     };
   </script>
+
+  <a href="https://www.goodreads.com/user/show/190762140-jaiden-li" target="_blank" id="goodreads-icon">
+  <img src="../images/goodreads.png" alt="Goodreads" width="50" height="50">
+</a>
+
+
+
 </body>
 </html>
