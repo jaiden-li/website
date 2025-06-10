@@ -1,77 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Writing Portfolio</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <title>🍓 Writing Portfolio 🍓</title>
   <link rel="icon" href="../images/pixel_p.png">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Loved+by+the+King" />
-  <link href='https://fonts.googleapis.com/css?family=Love Ya Like A Sister' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet'>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet"> 
+  <link href="//fonts.googleapis.com/css?family=Loved+by+the+King" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'EB Garamond';
-      font-size: 20px;
-      background: url('../images/bookclouds.png') no-repeat center center fixed;
-      background-size: cover;
+    * {
+      box-sizing: border-box;
     }
 
-    header h1 {
-      font-family: "Loved by the King";
-      font-size: 30px;
-      text-align: center;
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 10px;
+    body {
       margin: 0;
+      font-family: 'EB Garamond', serif;
+      background: url('../images/bookclouds.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+
+    header, footer {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px;
+    }
+
+    h1 {
+      font-family: "Loved by the King";
+      font-size: 36px;
+      margin: 10px 0;
     }
 
     .bookshelf-container {
       display: flex;
-      justify-content: center;
-      gap: 25px;
       flex-wrap: wrap;
-      margin-top: 50px;
-      padding: 20px;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px 20px;
     }
 
-    .bookshelf {
-      background-color: rgba(255, 255, 255, 0.85);
-      padding: 20px;
-      border-radius: 15px;
-      cursor: pointer;
-      text-align: center;
-      font-family: 'Love Ya Like A Sister';
-      font-size: 22px;
-      transition: transform 0.2s;
-      width: 200px;
-    }
-
-    .bookshelf:hover {
-      transform: scale(1.05);
-      background-color: rgba(255, 255, 206, 0.9);
-    }
-
-    .category-menu {
-      display: none;
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 20px;
-      margin: 20px auto;
-      width: 80%;
+    .shelf {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: black;
+      padding: 20px 30px;
       border-radius: 10px;
+      font-family: 'Love Ya Like A Sister', cursive;
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .shelf:hover {
+      transform: scale(1.05);
+      background-color: rgba(255, 255, 200, 0.95);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.8);
+      overflow: auto;
+      padding: 60px 20px;
+    }
+
+    .modal-content {
+      background-color: #fff8dc;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 800px;
+      color: black;
+    }
+
+    .close {
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     .portfolio-entry {
       background-color: rgb(255, 255, 206);
-      border: 2px solid #ddd;
-      border-radius: 15px;
       padding: 15px;
-      margin-bottom: 10px;
+      border-radius: 12px;
+      margin: 15px 0;
     }
 
-    .portfolio-entry h3 {
-      margin-top: 0;
-      font-family: 'Love Ya Like A Sister';
+    .portfolio-entry h2 {
+      font-family: 'Love Ya Like A Sister', cursive;
+      margin-bottom: 5px;
+    }
+
+    .portfolio-entry p.date {
+      font-size: 0.9em;
+      color: #888;
     }
 
     a {
@@ -84,16 +115,20 @@
       text-decoration: underline;
     }
 
-    footer {
-      text-align: center;
-      margin: 40px 0 20px;
-      background-color: rgba(255,255,255,0.8);
-      padding: 10px;
-      border-radius: 10px;
+    @media (max-width: 768px) {
+      .shelf {
+        width: 100%;
+        text-align: center;
+      }
+
+      .modal-content {
+        width: 95%;
+      }
     }
   </style>
 </head>
 <body>
+
   <div id="navbar-placeholder"></div>
   <script src="/navbar.js"></script>
 
@@ -102,74 +137,20 @@
   </header>
 
   <div class="bookshelf-container">
-    <div class="bookshelf" onclick="toggleMenu('authors-picks')">Author's Picks</div>
-    <div class="bookshelf" onclick="toggleMenu('whimsical')">Whimsical</div>
-    <div class="bookshelf" onclick="toggleMenu('realistic')">Realistic & Historical Fiction</div>
-    <div class="bookshelf" onclick="toggleMenu('in-progress')">In Progress</div>
-    <div class="bookshelf" onclick="toggleMenu('discontinued')">Permanently Discontinued</div>
+    <div class="shelf" onclick="openModal('authorsPicks')">Author's Picks</div>
+    <div class="shelf" onclick="openModal('whimsical')">Whimsical</div>
+    <div class="shelf" onclick="openModal('realistic')">Realistic & Historical Fiction</div>
+    <div class="shelf" onclick="openModal('inProgress')">In Progress</div>
+    <div class="shelf" onclick="openModal('discontinued')">Permanently Discontinued</div>
   </div>
 
-  <div id="authors-picks" class="category-menu">
-    <div class="portfolio-entry">
-      <h3>Eternally the Muse</h3>
-      <p>A mother, an artist. A daughter, a muse.</p>
-      <a href="../writings/muse.html">Read More</a>
-    </div>
-    <div class="portfolio-entry">
-      <h3>Burn, Incandescent.</h3>
-      <p>A story about burning in a physical, mental, and chemical sense.</p>
-      <a href="../writings/burn.html">Read More</a>
-    </div>
-    <div class="portfolio-entry">
-      <h3>repaired by friday</h3>
-      <p><b>Scholastic Honorable Mention 2024.</b> On a machine's ability to feel and love.</p>
-      <a href="../writings/friday.html">Read More</a>
-    </div>
-  </div>
-
-  <div id="whimsical" class="category-menu">
-    <div class="portfolio-entry">
-      <h3>Pretty Face with Pretty Bad Dreams</h3>
-      <p>Existentialism in a pretty package of future aspirations.</p>
-      <a href="../writings/pretty.html">Read More</a>
-    </div>
-    <div class="portfolio-entry">
-      <h3>tongue 'n cheek</h3>
-      <p>on losing everything and somehow still having everything.</p>
-      <a href="../writings/tongue.html">Read More</a>
-    </div>
-    <div class="portfolio-entry">
-      <h3>on intensity</h3>
-      <p>somewhere, a camera shutter clicks. you look intense.</p>
-      <a href="../writings/intensity.html">Read More</a>
-    </div>
-  </div>
-
-  <div id="realistic" class="category-menu">
-    <div class="portfolio-entry">
-      <h3>Girl Revolving Around the Sun</h3>
-      <p>Young Minerva Mirabal ponders the questions that will give birth to the Mariposa.</p>
-    </div>
-  </div>
-
-  <div id="in-progress" class="category-menu">
-    <div class="portfolio-entry">
-      <h3>Creditors' War</h3>
-      <p>**READ AT YOUR OWN DISCRETION.** Academic rivals to lovers trope with a twist.</p>
-      <a href="../writings/files/outline.pdf">Outline</a> | <a href="../writings/creditors_excerpt.html">Excerpt</a>
-    </div>
-    <div class="portfolio-entry">
-      <h3>To Sir Isaac Newton, With Love</h3>
-      <p>AI personas of scientists converse—Rachel Carson and Isaac Newton.</p>
-      <a href="../writings/files/To Sir Isaac Newton, With Love.pdf">Excerpt</a>
-    </div>
-  </div>
-
-  <div id="discontinued" class="category-menu">
-    <div class="portfolio-entry">
-      <h3>Kambridges</h3>
-      <p>Cupid's bow gets rusty. Inspired by Alice in Borderland.</p>
-      <a href="../writings/files/kambridges.pdf">Excerpt</a>
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div id="modal-body">
+        <!-- Dynamic content will be inserted here -->
+      </div>
     </div>
   </div>
 
@@ -178,16 +159,109 @@
   </footer>
 
   <script>
-    function toggleMenu(id) {
-      const menus = document.querySelectorAll('.category-menu');
-      menus.forEach(menu => {
-        if (menu.id === id) {
-          menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-        } else {
-          menu.style.display = 'none';
+    const entries = {
+      authorsPicks: [
+        {
+          title: "Eternally the Muse",
+          desc: "A mother, an artist. A daughter, a muse.",
+          date: "May 7, 2024",
+          link: "../writings/muse.html"
+        },
+        {
+          title: "Burn, Incandescent.",
+          desc: "A story about burning in a physical, mental, and chemical sense.",
+          date: "May 7, 2024",
+          link: "../writings/burn.html"
+        },
+        {
+          title: "repaired by friday",
+          desc: "<b>Scholastic Honorable Mention 2024.</b> On a machine's ability to feel and love.",
+          date: "October 15, 2023",
+          link: "../writings/friday.html"
         }
+      ],
+      whimsical: [
+        {
+          title: "Pretty Face with Pretty Bad Dreams",
+          desc: "Existentialism in a pretty package of future aspirations.",
+          date: "September 3, 2023",
+          link: "../writings/pretty.html"
+        },
+        {
+          title: "tongue 'n cheek",
+          desc: "on losing everything and somehow still having everything.",
+          date: "October 28, 2024",
+          link: "../writings/tongue.html"
+        },
+        {
+          title: "on intensity",
+          desc: "somewhere, a camera shutter clicks. you look intense.",
+          date: "January 10, 2025",
+          link: "../writings/intensity.html"
+        }
+      ],
+      realistic: [
+        {
+          title: "Girl Revolving Around the Sun",
+          desc: "Minerva Mirabal reflects on the thoughts that gave birth to the Mariposa.",
+          date: "April 29, 2023"
+        }
+      ],
+      inProgress: [
+        {
+          title: "Creditors' War",
+          desc: "**READ AT YOUR OWN DISCRETION.** A not so conventional take on the academic rivals to lovers trope.",
+          date: "December XX, 2023",
+          link: "../writings/creditors_excerpt.html"
+        },
+        {
+          title: "To Sir Isaac Newton, With Love",
+          desc: "AI personas of famous scientists interact to refine their personalities.",
+          date: "November XX, 2023",
+          link: "../writings/files/To Sir Isaac Newton, With Love.pdf"
+        }
+      ],
+      discontinued: [
+        {
+          title: "Kambridges",
+          desc: "Cupid’s bow is rusty. Teen Akane Heiya restores peace. <i>Inspired by Alice in Borderland.</i>",
+          date: "December 31, 2022",
+          link: "../writings/files/kambridges.pdf"
+        }
+      ]
+    };
+
+    function openModal(category) {
+      const modal = document.getElementById("modal");
+      const modalBody = document.getElementById("modal-body");
+      modalBody.innerHTML = "";
+
+      entries[category].forEach(entry => {
+        const div = document.createElement("div");
+        div.className = "portfolio-entry";
+
+        div.innerHTML = `
+          <h2>${entry.title}</h2>
+          <p>${entry.desc}</p>
+          <p class="date">${entry.date}</p>
+          ${entry.link ? `<a href="${entry.link}" target="_blank">Read More</a>` : ""}
+        `;
+        modalBody.appendChild(div);
       });
+
+      modal.style.display = "block";
     }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("modal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
   </script>
 </body>
 </html>
