@@ -176,6 +176,45 @@
   clip-path: polygon(50% 0%, 100% 100%, 0 100%);
 }
 
+.hanger-wrapper {
+  position: relative;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: -20px;
+  z-index: 2;
+}
+
+.hanger-image {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.photo-card {
+  background: transparent;
+  width: 200px;
+  height: 260px;
+  perspective: 1000px;
+  position: relative; /* For hanging line */
+}
+
+.photo-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 60px;
+  background-color: #a67c52;
+  z-index: -1;
+}
+
+
 
   </style>
 </head>
@@ -218,6 +257,9 @@
     </div>
   </div>
 <div class="photo-wall">
+    <div class="hanger-wrapper">
+    <img src="images/photo_string.png" class="hanger-image" alt="Photo Hanger">
+  </div>
   <div class="photo-line">
     <div class="photo-card">
       <div class="photo-inner">
