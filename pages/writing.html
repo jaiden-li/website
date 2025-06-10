@@ -1,188 +1,193 @@
 <!DOCTYPE html>
-    <html>
-        <head>
-            <title>portfolio</title>
-            <link rel="stylesheet" href="css/styles.css">
-            <link rel="icon" href="../images/pixel_p.png">
-            <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet"> 
-            <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Loved+by+the+King" />
-            <link href='https://fonts.googleapis.com/css?family=Love Ya Like A Sister' rel='stylesheet'>
-            <link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet'>
-            <style>
+<html>
+<head>
+  <title>Writing Portfolio</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="../images/pixel_p.png">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Loved+by+the+King" />
+  <link href='https://fonts.googleapis.com/css?family=Love Ya Like A Sister' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet'>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'EB Garamond';
+      font-size: 20px;
+      background: url('../images/bookclouds.png') no-repeat center center fixed;
+      background-size: cover;
+    }
 
-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; 
-  justify-content: flex-start; 
-  padding: 10px 0;
-}
+    header h1 {
+      font-family: "Loved by the King";
+      font-size: 30px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      margin: 0;
+    }
 
-.portfolio-entry {
-  flex: 1 1 calc(30% - 20px); 
-  max-width: 30%;
-  background-color: rgb(255, 255, 206);
-  border: 2px solid #ddd;
-  border-radius: 15px;
-  margin: 0; 
-  padding: 15px;
-  box-sizing: border-box;
-}
+    .bookshelf-container {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin-top: 50px;
+      padding: 20px;
+    }
 
-@media (max-width: 768px) {
-  .portfolio-entry {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-}
-            
-            h2 {
-                font-family: 'Love Ya Like A Sister';font-size: 22px;
-                background-color: white;
-                margin: 0;
-                padding: 0;
-                display: flex;
-                justify-content: space-around;
-                flex-wrap: wrap;
-              }
+    .bookshelf {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 20px;
+      border-radius: 15px;
+      cursor: pointer;
+      text-align: center;
+      font-family: 'Love Ya Like A Sister';
+      font-size: 22px;
+      transition: transform 0.2s;
+      width: 200px;
+    }
 
-            body {
-                font-family: 'EB Garamond';font-size: 22px;
-                
-            }
+    .bookshelf:hover {
+      transform: scale(1.05);
+      background-color: rgba(255, 255, 206, 0.9);
+    }
 
-            h1 { 
-                font-family: "Loved by the King"; font-size: 30px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; 
-                text-align: center;
-            }
-        
-              p {
-                color: #666;
-              }
-          
-              .date {
-                color: #999;
-              }
-          
-              a {
-                color: #007BFF;
-                text-decoration: none;
-                font-weight: bold;
-              }
-          
-              a:hover {
-                text-decoration: underline;
-              }
-            </style>
-        </head>
+    .category-menu {
+      display: none;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      margin: 20px auto;
+      width: 80%;
+      border-radius: 10px;
+    }
 
-        <body style="background-color:gray;">
+    .portfolio-entry {
+      background-color: rgb(255, 255, 206);
+      border: 2px solid #ddd;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 10px;
+    }
 
-            <header>
-                <h1>🍓 Writing Portfolio 🍓</h1>
-            </header>
-        
-            <section>
-                <h2>Author's Picks</h2>
+    .portfolio-entry h3 {
+      margin-top: 0;
+      font-family: 'Love Ya Like A Sister';
+    }
 
-                <div class="portfolio-entry">
-                  <h2>Eternally the Muse</h2>
-                  <p>A mother, an artist. A daughter, a muse.</p>
-                  <p class="date">May 7, 2024</p>
-                  <a href="../writings/muse.html">Read More</a>
-                </div>
+    a {
+      color: #007BFF;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-                <div class="portfolio-entry">
-                  <h2>Burn, Incandescent.</h2>
-                  <p>A story about burning in a physical, mental, and chemical sense.</p>
-                  <p class="date">May 7, 2024</p>
-                  <a href="../writings/burn.html">Read More</a>
-                </div>
+    a:hover {
+      text-decoration: underline;
+    }
 
-                <div class="portfolio-entry">
-                  <h2>repaired by friday</h2>
-                  <p><b>Scholastic Honorable Mention 2024.</b> On a machine's ability to feel and love.</p>
-                  <p class="date">October 15, 2023</p>
-                  <a href="../writings/friday.html">Read More</a>
-                  </div>
+    footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      background-color: rgba(255,255,255,0.8);
+      padding: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+  <script src="/navbar.js"></script>
 
-            </section>
+  <header>
+    <h1>🍓 Writing Portfolio 🍓</h1>
+  </header>
 
-            <section>
-              <h2>whimsical</h2>
+  <div class="bookshelf-container">
+    <div class="bookshelf" onclick="toggleMenu('authors-picks')">Author's Picks</div>
+    <div class="bookshelf" onclick="toggleMenu('whimsical')">Whimsical</div>
+    <div class="bookshelf" onclick="toggleMenu('realistic')">Realistic & Historical Fiction</div>
+    <div class="bookshelf" onclick="toggleMenu('in-progress')">In Progress</div>
+    <div class="bookshelf" onclick="toggleMenu('discontinued')">Permanently Discontinued</div>
+  </div>
 
-              
-              <div class="portfolio-entry">
-                <h2>Pretty Face with Pretty Bad Dreams</h2>
-                <p>Existentialism in a pretty package of future aspirations.</p>
-                <p class="date">September 3, 2023</p>
-                <a href="../writings/pretty.html">Read More</a>
-            </div>
+  <div id="authors-picks" class="category-menu">
+    <div class="portfolio-entry">
+      <h3>Eternally the Muse</h3>
+      <p>A mother, an artist. A daughter, a muse.</p>
+      <a href="../writings/muse.html">Read More</a>
+    </div>
+    <div class="portfolio-entry">
+      <h3>Burn, Incandescent.</h3>
+      <p>A story about burning in a physical, mental, and chemical sense.</p>
+      <a href="../writings/burn.html">Read More</a>
+    </div>
+    <div class="portfolio-entry">
+      <h3>repaired by friday</h3>
+      <p><b>Scholastic Honorable Mention 2024.</b> On a machine's ability to feel and love.</p>
+      <a href="../writings/friday.html">Read More</a>
+    </div>
+  </div>
 
-            <div class="portfolio-entry">
-              <h2>tongue 'n cheek</h2>
-              <p>on losing everything and somehow still having everything. </p>
-              <p class="date">October 28, 2024</p>
-              <a href="../writings/tongue.html">Read More</a>
-            </div>
+  <div id="whimsical" class="category-menu">
+    <div class="portfolio-entry">
+      <h3>Pretty Face with Pretty Bad Dreams</h3>
+      <p>Existentialism in a pretty package of future aspirations.</p>
+      <a href="../writings/pretty.html">Read More</a>
+    </div>
+    <div class="portfolio-entry">
+      <h3>tongue 'n cheek</h3>
+      <p>on losing everything and somehow still having everything.</p>
+      <a href="../writings/tongue.html">Read More</a>
+    </div>
+    <div class="portfolio-entry">
+      <h3>on intensity</h3>
+      <p>somewhere, a camera shutter clicks. you look intense.</p>
+      <a href="../writings/intensity.html">Read More</a>
+    </div>
+  </div>
 
-            
-            <div class="portfolio-entry">
-              <h2>on intensity</h2>
-              <p>somewhere, a camera shutter clicks. you look intense.</p>
-              <p class="date">January 10, 2025</p>
-              <a href="../writings/intensity.html">Read More</a>
-            </div>
+  <div id="realistic" class="category-menu">
+    <div class="portfolio-entry">
+      <h3>Girl Revolving Around the Sun</h3>
+      <p>Young Minerva Mirabal ponders the questions that will give birth to the Mariposa.</p>
+    </div>
+  </div>
 
-            </section>
-            
-            <section>
-              <h2>Realistic & Historical Fiction</h2>
+  <div id="in-progress" class="category-menu">
+    <div class="portfolio-entry">
+      <h3>Creditors' War</h3>
+      <p>**READ AT YOUR OWN DISCRETION.** Academic rivals to lovers trope with a twist.</p>
+      <a href="../writings/files/outline.pdf">Outline</a> | <a href="../writings/creditors_excerpt.html">Excerpt</a>
+    </div>
+    <div class="portfolio-entry">
+      <h3>To Sir Isaac Newton, With Love</h3>
+      <p>AI personas of scientists converse—Rachel Carson and Isaac Newton.</p>
+      <a href="../writings/files/To Sir Isaac Newton, With Love.pdf">Excerpt</a>
+    </div>
+  </div>
 
-              <div class="portfolio-entry">
-                <h2>Girl Revolving Around the Sun</h2>
-                <p>During a period of vacancy in young Minerva Mirabal's life, she ponders the questions that will give birth to the Mariposa, the most legendary of the Mirabal sisters.</p>
-                <p class="date">April 29, 2023</p>
-              </div>
-            </section>
+  <div id="discontinued" class="category-menu">
+    <div class="portfolio-entry">
+      <h3>Kambridges</h3>
+      <p>Cupid's bow gets rusty. Inspired by Alice in Borderland.</p>
+      <a href="../writings/files/kambridges.pdf">Excerpt</a>
+    </div>
+  </div>
 
-            <section>
-              <h2>In Progress</h2>
+  <footer>
+    <p><b>&copy; 2023 Jaiden Li. All rights reserved.</b></p>
+  </footer>
 
-              <div class="portfolio-entry">
-                <h2>Creditors' War</h2>
-                <p>**READ AT YOUR OWN DISCRETION.** A not so conventional take on the academic rivals to lovers trope (see my blog post!) </p>
-                <p class="date">December XX, 2023</p>
-                <a href="../writings/files/outline.pdf">Outline</a><br>
-                <a href="../writings/creditors_excerpt.html">Excerpt</a>
-              </div>
-
-              <div class="portfolio-entry">
-                <h2>To Sir Isaac Newton, With Love</h2>
-                <p>In the future, scientists create AI personas of famous deceased scientists to seek their consul on important matters. As part of the training process, they must interact with each other to refine their personalities.<br>
-                  <br>A series of exchanges between environmentalist Rachel Carson and physicist Isaac Newton.
-                </p>
-                <p class="date">November XX, 2023</p>
-                <a href="../writings/files/To Sir Isaac Newton, With Love.pdf">Excerpt</a>
-              </div>
-              </section>
-
-              <section>
-                <h2>Permanently Discontinued + Old Works</h2>
-                  <div class="portfolio-entry">
-                    <h2>Kambridges</h2>
-                    <p>Cupid’s bow is getting too old and rusty. With the help of Japanese teenager Akane Heiya, the world is restored back to peace. <i>Inspired by Alice in Borderland.</i></p>
-                    <p class="date">December 31, 2022</p>
-                    <a href="../writings/files/kambridges.pdf">Excerpt</a>
-                  </div>
-
-              </section>
-
-        
-            <footer>
-                <p><b>&copy; 2023 Jaiden Li. All rights reserved.</b></p>
-            </footer>
-        
-        </body>
-        </html>
-    </html>
+  <script>
+    function toggleMenu(id) {
+      const menus = document.querySelectorAll('.category-menu');
+      menus.forEach(menu => {
+        if (menu.id === id) {
+          menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        } else {
+          menu.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
