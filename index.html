@@ -99,21 +99,62 @@
   display: flex;
   overflow-x: auto;
   padding: 20px 0;
-  border-top: 4px solid #d6c6ae;
-  border-bottom: 4px solid #d6c6ae;
-  position: relative;
   gap: 40px;
   justify-content: center;
+  border-top: 4px solid #d6c6ae;
+  border-bottom: 4px solid #d6c6ae;
 }
 
-.photo-item {
-  position: relative;
-  display: inline-block;
-  background: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+.photo-card {
+  background: transparent;
+  width: 200px;
+  height: 260px;
+  perspective: 1000px;
 }
+
+.photo-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.photo-card:hover .photo-inner,
+.photo-card:active .photo-inner {
+  transform: rotateY(180deg);
+}
+
+.photo-front, .photo-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.photo-front img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.photo-back {
+  background-color: #fefae0;
+  color: #333;
+  transform: rotateY(180deg);
+  font-size: 14px;
+  text-align: center;
+  padding: 20px;
+  line-height: 1.4;
+}
+
 
 .photo-item img {
   width: 200px;
@@ -176,17 +217,39 @@
   </div>
 <div class="photo-wall">
   <div class="photo-line">
-    <div class="photo-item">
-      <img src="images/dreams.png" alt="Photo 1">
+    <div class="photo-card">
+      <div class="photo-inner">
+        <div class="photo-front">
+          <img src="images/dreams.png" alt="Dreams">
+        </div>
+        <div class="photo-back">
+          <p>a collection of dreams i can’t recall 🌙</p>
+        </div>
+      </div>
     </div>
-    <div class="photo-item">
-      <img src="images/sunset_vertical.png" alt="Photo 2">
+    <div class="photo-card">
+      <div class="photo-inner">
+        <div class="photo-front">
+          <img src="images/sunset_vertical.png" alt="Sunset">
+        </div>
+        <div class="photo-back">
+          <p>somewhere between day and night</p>
+        </div>
+      </div>
     </div>
-    <div class="photo-item">
-      <img src="images/bookclouds.png" alt="Photo 3">
+    <div class="photo-card">
+      <div class="photo-inner">
+        <div class="photo-front">
+          <img src="images/bookclouds.png" alt="Books & Clouds">
+        </div>
+        <div class="photo-back">
+          <p>stories that shape the sky</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 
   <footer>
     <ul>
