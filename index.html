@@ -83,6 +83,57 @@
   margin: 0 auto; 
 }
 
+.photo-wall {
+  margin: 60px auto;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.photo-wall-title {
+  font-size: 30px;
+  margin-bottom: 30px;
+  color: #3d3d3d;
+}
+
+.photo-line {
+  display: flex;
+  overflow-x: auto;
+  padding: 20px 0;
+  border-top: 4px solid #d6c6ae;
+  border-bottom: 4px solid #d6c6ae;
+  position: relative;
+  gap: 40px;
+  justify-content: center;
+}
+
+.photo-item {
+  position: relative;
+  display: inline-block;
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.photo-item img {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.photo-item::before {
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 30px;
+  background: #a67c52;
+  clip-path: polygon(50% 0%, 100% 100%, 0 100%);
+}
+
+
   </style>
 </head>
 <body>
@@ -123,9 +174,24 @@
       </div>
     </div>
   </div>
-  <figure class="centered-figure">
-    <img class="square" src="images/dreams.png" alt="dreaming alias">
-  </figure>
+<div class="photo-wall">
+  <h2 class="photo-wall-title">Photos</h2>
+  <div class="photo-line">
+    <div class="photo-item">
+      <img src="images/dreams.png" alt="Photo 1">
+    </div>
+    <div class="photo-item">
+      <img src="images/aw.png" alt="Photo 2">
+    </div>
+    <div class="photo-item">
+      <img src="images/besties.png" alt="Photo 3">
+    </div>
+    <div class="photo-item">
+      <img src="images/sunset.png" alt="Photo 4">
+    </div>
+  </div>
+</div>
+
   <footer>
     <ul>
       <li><a href="mailto:dreampenjaiden@gmail.com">Email Me!</a></li>
