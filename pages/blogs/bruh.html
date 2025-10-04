@@ -131,7 +131,6 @@
 <body>
   <header>
     <h1>New Chat 🍂</h1>
-    <span>10.04.2025</span>
     <label class="upload-label" for="fileUpload">Upload PDF</label>
     <input type="file" id="fileUpload" accept="application/pdf" />
   </header>
@@ -171,7 +170,6 @@
       bubble.className = 'message';
       bubble.textContent = input.value;
 
-      // order: avatar left for therapist, right for patient
       if (sender.value === 'therapist') {
         row.appendChild(avatar);
         row.appendChild(bubble);
