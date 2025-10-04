@@ -22,15 +22,39 @@
       align-items: center;
     }
 
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem; 
+    }
+
     header h1 {
       font-size: 1.2rem;
       margin: 0;
       color: #374151;
     }
 
-    header span {
+    .upload-label {
       font-size: 0.9rem;
-      color: #6b7280;
+      color: #9ca3af; /* light grey */
+      cursor: pointer;
+    }
+
+    #fileUpload {
+      display: none;
+    }
+
+    .export-btn {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+
+    .export-btn:hover {
+      background: #059669;
     }
 
     main {
@@ -130,9 +154,12 @@
 </head>
 <body>
   <header>
-    <h1>New Chat 🍂</h1>
-    <label class="upload-label" for="fileUpload">Upload PDF</label>
-    <input type="file" id="fileUpload" accept="application/pdf" />
+    <div class="header-left">
+      <h1>New Chat 🍂</h1>
+      <label class="upload-label" for="fileUpload">Upload PDF</label>
+      <input type="file" id="fileUpload" accept="application/pdf" />
+    </div>
+    <button class="export-btn" onclick="exportChat()">Export</button>
   </header>
 
   <main id="chat">
@@ -156,7 +183,6 @@
     function sendMessage() {
       if (!input.value.trim()) return;
 
-      // remove placeholder text
       if (chat.firstElementChild?.tagName === "P") chat.innerHTML = "";
 
       const row = document.createElement('div');
@@ -187,6 +213,23 @@
     input.addEventListener('keydown', e => {
       if (e.key === 'Enter') sendMessage();
     });
+
+    // Export chat as text file
+    function exportChat() {
+      const rows = chat.querySelectorAll('.message-row');
+      let exportText = "";
+      rows.forEach(row => {
+        const role = row.classList.contains('patient') ? "Patient" : "Therapist";
+        const message = row.querySelector('.message').textContent;
+        exportText += `${role}: ${message}\n`;
+      });
+
+      const blob = new Blob([exportText], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "conversation.txt";
+      link.click();
+    }
   </script>
 </body>
 </html>
