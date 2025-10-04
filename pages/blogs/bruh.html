@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI–Human Chat Demo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: linear-gradient(135deg, #f0f9ff, #ecfdf5);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.2rem;
+      margin: 0;
+      color: #374151;
+    }
+
+    header span {
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    main {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .message-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+
+    .message {
+      max-width: 65%;
+      padding: 0.75rem 1rem;
+      border-radius: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .patient-row {
+      justify-content: flex-end;
+    }
+
+    .therapist-row {
+      justify-content: flex-start;
+    }
+
+    .patient .message {
+      background: #a7f3d0;
+      color: #064e3b;
+      border-bottom-right-radius: 0.3rem;
+    }
+
+    .therapist .message {
+      background: #bfdbfe;
+      color: #1e3a8a;
+      border-bottom-left-radius: 0.3rem;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .patient .avatar {
+      background: #10b981;
+    }
+
+    .therapist .avatar {
+      background: #3b82f6;
+    }
+
+    footer {
+      background: #fff;
+      border-top: 1px solid #e5e7eb;
+      padding: 0.75rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    select, input, button {
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    input {
+      flex: 1;
+    }
+
+    button {
+      background: #10b981;
+      color: white;
+      cursor: pointer;
+      border: none;
+      padding: 0.5rem 1rem;
+    }
+
+    button:hover {
+      background: #059669;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🪷 AI–Human Chat Demo</h1>
+    <span>Therapist–Patient Simulation</span>
+  </header>
+
+  <main id="chat">
+    <p style="text-align:center;color:#9ca3af">Your conversation will appear here…</p>
+  </main>
+
+  <footer>
+    <select id="sender">
+      <option value="patient">Patient</option>
+      <option value="therapist">AI Therapist</option>
+    </select>
+    <input id="input" type="text" placeholder="Type your message…" />
+    <button onclick="sendMessage()">Send</button>
+  </footer>
+
+  <script>
+    const chat = document.getElementById('chat');
+    const input = document.getElementById('input');
+    const sender = document.getElementById('sender');
+
+    function sendMessage() {
+      if (!input.value.trim()) return;
+
+      // remove placeholder text
+      if (chat.firstElementChild?.tagName === "P") chat.innerHTML = "";
+
+      const row = document.createElement('div');
+      row.className = `message-row ${sender.value}-row ${sender.value}`;
+
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.textContent = sender.value === 'patient' ? 'P' : 'T';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'message';
+      bubble.textContent = input.value;
+
+      // order: avatar left for therapist, right for patient
+      if (sender.value === 'therapist') {
+        row.appendChild(avatar);
+        row.appendChild(bubble);
+      } else {
+        row.appendChild(bubble);
+        row.appendChild(avatar);
+      }
+
+      chat.appendChild(row);
+      chat.scrollTop = chat.scrollHeight;
+
+      input.value = '';
+    }
+
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>
