@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SoCal Quizbowl Tournament Forecast</title>
+<meta name="description" content="Simulated results for every prelim and playoff game, seeding odds and title odds.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: scoreboard forecast — odds summary, then pools, then round-by-round game cards in a responsive grid */
+:root{--bg:#eef1f4;--card:#fff;--ink:#16202b;--mute:#5d6b79;--line:#d8dee5;
+--y:#0e7c74;--ys:#dcf1ee;--l:#b25d0c;--ls:#f8e8d6;--good:#2f7d32;--warn:#a46a00;--track:#e3e8ee;
+--disp:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f151b;--card:#18212a;--ink:#e6ecf1;--mute:#93a1ae;--line:#2a3541;--y:#4cc7bb;--ys:#123a37;--l:#f0a35a;--ls:#3d2a17;--good:#6fcf73;--warn:#e6b450;--track:#26313c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f151b;--card:#18212a;--ink:#e6ecf1;--mute:#93a1ae;--line:#2a3541;--y:#4cc7bb;--ys:#123a37;--l:#f0a35a;--ls:#3d2a17;--good:#6fcf73;--warn:#e6b450;--track:#26313c;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 40px}
+.wrap{max-width:1120px;margin:0 auto;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--disp);margin:0;line-height:1.05;text-wrap:balance}
+h1{font-size:clamp(30px,5.5vw,46px)} h2{font-size:26px;text-transform:uppercase;letter-spacing:.04em} h3{font-size:20px;text-transform:uppercase;letter-spacing:.04em}
+.lede{color:var(--mute);max-width:72ch;margin:8px 0 0}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+nav a{color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--card);padding:4px 10px;border-radius:999px;font-size:13px}
+nav a:hover,nav a:focus-visible{border-color:var(--ink);outline:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:10px}
+.sec-head p{margin:0;color:var(--mute);font-size:13px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+td small{display:block;color:var(--mute);font-size:11.5px;margin-top:2px}
+.num{text-align:right;white-space:nowrap}
+.pbar{display:inline-block;vertical-align:middle;width:70px;height:6px;border-radius:3px;margin-right:8px;background:linear-gradient(90deg,var(--ink) var(--p),var(--track) var(--p))}
+.team{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;font-weight:600;font-size:12.5px;padding:2px 8px;border-radius:999px}
+.team.y{background:var(--ys);color:var(--y)} .team.l{background:var(--ls);color:var(--l)}
+.sd{font-size:10.5px;opacity:.8;font-weight:700}
+.pools{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px}
+.pool h3{margin-bottom:6px} .pool.y h3{color:var(--y)} .pool.l h3{color:var(--l)}
+.round{display:grid;gap:10px}
+.round header{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;border-bottom:2px solid var(--line);padding-bottom:4px}
+.bye{color:var(--mute);font-size:12.5px}
+.games{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px}
+.game{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:5px}
+.room{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.sc{font-family:var(--disp);font-size:22px;font-variant-numeric:tabular-nums;color:var(--mute)}
+.row.w .sc{color:var(--ink)}
+.pr{display:grid;gap:4px;font-size:11.5px;color:var(--mute);margin-top:2px}
+.pr .bar{height:4px;border-radius:2px;background:linear-gradient(90deg,var(--c) var(--p),var(--track) var(--p))}
+.pr.lock{--c:var(--good)} .pr.fav{--c:var(--good)} .pr.lean{--c:var(--warn)} .pr.toss{--c:var(--warn)}
+.rounds{display:grid;gap:22px}
+.notes{color:var(--mute);font-size:12.5px;max-width:90ch;display:grid;gap:6px}
+.notes p{margin:0}
+@media (prefers-reduced-motion:no-preference){.game{transition:border-color .15s} .game:hover{border-color:var(--mute)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>SoCal Quizbowl Tournament Forecast</h1>
+<p class="lede">Every game simulated 10,000 times, tossup by tossup. Each card shows one actual simulated game at the median margin, plus how often the favorite won. Tossups are 10, bonuses 0/10/20/30, negs −5, 20 tossups per game. UCLA B wins the title in 42% of simulations.</p>
+<nav><a href="#odds">Title odds</a><a href="#pools">Pools &amp; seeds</a><a href="#prelims">Prelims</a><a href="#playoffs">Playoffs</a><a href="#method">How it works</a></nav>
+</header>
+
+<section id="odds" class="card"><div class="sec-head"><h2>Title odds</h2><p>Final place across 10,000 simulated tournaments</p></div>
+<div class="tw"><table><thead><tr><th class="num">#</th><th>Team</th><th class="num">Wins title</th><th class="num">Top 3</th><th class="num">Avg. place</th></tr></thead><tbody><tr><td class="num">1</td><td><span class="team l">UCLA B</span><small>Karthik Jayaram, Josh Xu</small></td><td class="num"><span class="pbar" style="--p:42.4%"></span>42.4%</td><td class="num">80%</td><td class="num">2.3</td></tr><tr><td class="num">2</td><td><span class="team y">Claremont A</span><small>Akshay Seetharam, Annika Larson, Sarah Silverman, Maggie McAteer</small></td><td class="num"><span class="pbar" style="--p:20.4%"></span>20.4%</td><td class="num">62%</td><td class="num">3.2</td></tr><tr><td class="num">3</td><td><span class="team y">USC</span><small>Karthik Krishnamurthy, Ty Butler, Sage Saperstein, Michael Fayer, Vivienne Ruemler</small></td><td class="num"><span class="pbar" style="--p:12.6%"></span>12.6%</td><td class="num">49%</td><td class="num">3.7</td></tr><tr><td class="num">4</td><td><span class="team y">UCLA C</span><small>Rahul Jogadhenu, Nikola Wu, Andrew Nucci, Max Ying</small></td><td class="num"><span class="pbar" style="--p:8.7%"></span>8.7%</td><td class="num">38%</td><td class="num">4.2</td></tr><tr><td class="num">5</td><td><span class="team l">UCSD B</span><small>Emma Horwitz, Jaiden Li, Jake Anderson, Shahar Schwartz</small></td><td class="num"><span class="pbar" style="--p:9.9%"></span>9.9%</td><td class="num">39%</td><td class="num">4.4</td></tr><tr><td class="num">6</td><td><span class="team l">Caltech</span><small>Shiv Seshan, Hansen Jin, Timothy Tu</small></td><td class="num"><span class="pbar" style="--p:5.3%"></span>5.3%</td><td class="num">26%</td><td class="num">5.0</td></tr><tr><td class="num">7</td><td><span class="team l">UCSD A</span><small>Gary Lin, March Delfin, Payton Chung</small></td><td class="num"><span class="pbar" style="--p:0.4%"></span>0.4%</td><td class="num">3%</td><td class="num">7.2</td></tr><tr><td class="num">8</td><td><span class="team l">UCLA E</span><small>Neel Ghosh, Paul Macapinlac, Henry Morales, Gugan Thuduppathy</small></td><td class="num"><span class="pbar" style="--p:0.2%"></span>0.2%</td><td class="num">2%</td><td class="num">7.4</td></tr><tr><td class="num">9</td><td><span class="team y">UCLA D</span><small>Terrence Han, Kaiwen Xiao</small></td><td class="num"><span class="pbar" style="--p:0.1%"></span>0.1%</td><td class="num">2%</td><td class="num">7.6</td></tr><tr><td class="num">10</td><td><span class="team y">UCSD C</span><small>Dominic Salazar, Mark Cheng, Palak Maleshwari, Vrithika Vaithi</small></td><td class="num"><span class="pbar" style="--p:0.0%"></span>0.0%</td><td class="num">0%</td><td class="num">10.2</td></tr><tr><td class="num">11</td><td><span class="team l">UCSB</span><small>Ashlee Bacconi, Ved Pradhan, Sam Leonard, Andrew Shen, Nathan Silverman, Prajwal Vandana</small></td><td class="num"><span class="pbar" style="--p:0.0%"></span>0.0%</td><td class="num">0%</td><td class="num">11.3</td></tr><tr><td class="num">12</td><td><span class="team y">UCLA A</span><small>Abhinav Rachakonda</small></td><td class="num"><span class="pbar" style="--p:0.0%"></span>0.0%</td><td class="num">0%</td><td class="num">12.2</td></tr><tr><td class="num">13</td><td><span class="team y">Claremont B</span><small>Quinn Evans, Quinn Gifford, Abby Muller, Rain Abola</small></td><td class="num"><span class="pbar" style="--p:0.0%"></span>0.0%</td><td class="num">0%</td><td class="num">12.5</td></tr><tr><td class="num">14</td><td><span class="team l">UCI</span><small>Advai Srinivasan, Joseph Tian</small></td><td class="num"><span class="pbar" style="--p:0.0%"></span>0.0%</td><td class="num">0%</td><td class="num">13.8</td></tr></tbody></table></div></section>
+
+<section id="pools"><div class="sec-head"><h2>Pools &amp; projected seeds</h2><p>Top 3 in each pool advance to the top bracket</p></div>
+<div class="pools"><div class="card pool y"><h3>Yashar</h3><div class="tw"><table><thead><tr><th>Seed</th><th>Team</th><th class="num">Avg. wins</th><th class="num">Avg. seed</th><th class="num">Top 3</th></tr></thead><tbody><tr><td class="num">Y1</td><td><span class="team y">Claremont A</span></td><td class="num">4.9</td><td class="num">1.9</td><td class="num">95%</td></tr><tr><td class="num">Y2</td><td><span class="team y">USC</span></td><td class="num">4.8</td><td class="num">2.1</td><td class="num">91%</td></tr><tr><td class="num">Y3</td><td><span class="team y">UCLA C</span></td><td class="num">4.6</td><td class="num">2.3</td><td class="num">89%</td></tr><tr><td class="num">Y4</td><td><span class="team y">UCLA D</span></td><td class="num">3.5</td><td class="num">3.7</td><td class="num">24%</td></tr><tr><td class="num">Y5</td><td><span class="team y">UCSD C</span></td><td class="num">1.9</td><td class="num">5.1</td><td class="num">0%</td></tr><tr><td class="num">Y6</td><td><span class="team y">UCLA A</span></td><td class="num">0.7</td><td class="num">6.3</td><td class="num">0%</td></tr><tr><td class="num">Y7</td><td><span class="team y">Claremont B</span></td><td class="num">0.6</td><td class="num">6.5</td><td class="num">0%</td></tr></tbody></table></div></div>
+<div class="card pool l"><h3>Likud</h3><div class="tw"><table><thead><tr><th>Seed</th><th>Team</th><th class="num">Avg. wins</th><th class="num">Avg. seed</th><th class="num">Top 3</th></tr></thead><tbody><tr><td class="num">L1</td><td><span class="team l">UCLA B</span></td><td class="num">5.0</td><td class="num">1.5</td><td class="num">96%</td></tr><tr><td class="num">L2</td><td><span class="team l">UCSD B</span></td><td class="num">4.3</td><td class="num">2.6</td><td class="num">77%</td></tr><tr><td class="num">L3</td><td><span class="team l">Caltech</span></td><td class="num">4.1</td><td class="num">2.8</td><td class="num">73%</td></tr><tr><td class="num">L4</td><td><span class="team l">UCSD A</span></td><td class="num">3.3</td><td class="num">4.0</td><td class="num">28%</td></tr><tr><td class="num">L5</td><td><span class="team l">UCLA E</span></td><td class="num">3.2</td><td class="num">4.1</td><td class="num">25%</td></tr><tr><td class="num">L6</td><td><span class="team l">UCSB</span></td><td class="num">1.0</td><td class="num">6.1</td><td class="num">0%</td></tr><tr><td class="num">L7</td><td><span class="team l">UCI</span></td><td class="num">0.1</td><td class="num">6.9</td><td class="num">0%</td></tr></tbody></table></div></div></div></section>
+
+<section id="prelims"><div class="sec-head"><h2>Prelims</h2><p>Round robin within each pool · rooms and moderators from the schedule</p></div>
+<div class="rounds"><section class="round"><header><h3>Round 1</h3><span class="bye">Byes: USC, UCSD B</span></header><ol class="games"><li class="game"><div class="room">3421 · Janice</div>
+<div class="row w"><span class="team y">UCSD C</span><b class="sc">230</b></div>
+<div class="row"><span class="team y">UCLA A</span><b class="sc">130</b></div>
+<div class="pr fav"><span class="bar" style="--p:85%"></span><span>Favorite · 85%</span></div></li><li class="game"><div class="room">3425 · Nolan</div>
+<div class="row w"><span class="team y">UCLA C</span><b class="sc">390</b></div>
+<div class="row"><span class="team y">Claremont B</span><b class="sc">55</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li><li class="game"><div class="room">3461 · Jas</div>
+<div class="row w"><span class="team y">Claremont A</span><b class="sc">370</b></div>
+<div class="row"><span class="team y">UCLA D</span><b class="sc">250</b></div>
+<div class="pr fav"><span class="bar" style="--p:81%"></span><span>Favorite · 81%</span></div></li><li class="game"><div class="room">3465 · Jason</div>
+<div class="row w"><span class="team l">UCSD A</span><b class="sc">410</b></div>
+<div class="row"><span class="team l">UCI</span><b class="sc">80</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li><li class="game"><div class="room">3481 · Ethan</div>
+<div class="row w"><span class="team l">Caltech</span><b class="sc">310</b></div>
+<div class="row"><span class="team l">UCLA E</span><b class="sc">240</b></div>
+<div class="pr fav"><span class="bar" style="--p:70%"></span><span>Favorite · 70%</span></div></li><li class="game"><div class="room">3460 · Adam</div>
+<div class="row w"><span class="team l">UCLA B</span><b class="sc">425</b></div>
+<div class="row"><span class="team l">UCSB</span><b class="sc">65</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li></ol></section><section class="round"><header><h3>Round 2</h3><span class="bye">Byes: UCLA C, UCLA E</span></header><ol class="games"><li class="game"><div class="room">3421 · Janice</div>
+<div class="row w"><span class="team y">UCLA D</span><b class="sc">325</b></div>
+<div class="row"><span class="team y">UCLA A</span><b class="sc">80</b></div>
+<div class="pr lock"><span class="bar" style="--p:99%"></span><span>Heavy favorite · 99%</span></div></li><li class="game"><div class="room">3425 · Nolan</div>
+<div class="row w"><span class="team y">Claremont A</span><b class="sc">300</b></div>
+<div class="row"><span class="team y">USC</span><b class="sc">280</b></div>
+<div class="pr toss"><span class="bar" style="--p:55%"></span><span>Toss-up · 55%</span></div></li><li class="game"><div class="room">3461 · Jas</div>
+<div class="row w"><span class="team y">UCSD C</span><b class="sc">245</b></div>
+<div class="row"><span class="team y">Claremont B</span><b class="sc">130</b></div>
+<div class="pr fav"><span class="bar" style="--p:87%"></span><span>Favorite · 87%</span></div></li><li class="game"><div class="room">3465 · Jason</div>
+<div class="row w"><span class="team l">UCLA B</span><b class="sc">490</b></div>
+<div class="row"><span class="team l">UCI</span><b class="sc">45</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li><li class="game"><div class="room">3481 · Ethan</div>
+<div class="row w"><span class="team l">UCSD B</span><b class="sc">400</b></div>
+<div class="row"><span class="team l">UCSB</span><b class="sc">125</b></div>
+<div class="pr lock"><span class="bar" style="--p:98%"></span><span>Heavy favorite · 98%</span></div></li><li class="game"><div class="room">3460 · Adam</div>
+<div class="row w"><span class="team l">Caltech</span><b class="sc">330</b></div>
+<div class="row"><span class="team l">UCSD A</span><b class="sc">265</b></div>
+<div class="pr lean"><span class="bar" style="--p:69%"></span><span>Slight edge · 69%</span></div></li></ol></section><section class="round"><header><h3>Round 3</h3><span class="bye">Byes: UCLA A, UCI</span></header><ol class="games"><li class="game"><div class="room">3421 · Janice</div>
+<div class="row w"><span class="team y">USC</span><b class="sc">310</b></div>
+<div class="row"><span class="team y">UCLA C</span><b class="sc">295</b></div>
+<div class="pr toss"><span class="bar" style="--p:54%"></span><span>Toss-up · 54%</span></div></li><li class="game"><div class="room">3425 · Nolan</div>
+<div class="row w"><span class="team y">UCLA D</span><b class="sc">315</b></div>
+<div class="row"><span class="team y">UCSD C</span><b class="sc">165</b></div>
+<div class="pr lock"><span class="bar" style="--p:90%"></span><span>Heavy favorite · 90%</span></div></li><li class="game"><div class="room">3461 · Jas</div>
+<div class="row w"><span class="team y">Claremont A</span><b class="sc">440</b></div>
+<div class="row"><span class="team y">Claremont B</span><b class="sc">90</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li><li class="game"><div class="room">3465 · Jason</div>
+<div class="row w"><span class="team l">UCSD B</span><b class="sc">285</b></div>
+<div class="row"><span class="team l">UCLA E</span><b class="sc">210</b></div>
+<div class="pr fav"><span class="bar" style="--p:70%"></span><span>Favorite · 70%</span></div></li><li class="game"><div class="room">3481 · Ethan</div>
+<div class="row w"><span class="team l">UCLA B</span><b class="sc">350</b></div>
+<div class="row"><span class="team l">UCSD A</span><b class="sc">205</b></div>
+<div class="pr fav"><span class="bar" style="--p:85%"></span><span>Favorite · 85%</span></div></li><li class="game"><div class="room">3460 · Adam</div>
+<div class="row w"><span class="team l">Caltech</span><b class="sc">390</b></div>
+<div class="row"><span class="team l">UCSB</span><b class="sc">95</b></div>
+<div class="pr lock"><span class="bar" style="--p:99%"></span><span>Heavy favorite · 99%</span></div></li></ol></section><section class="round"><header><h3>Round 4</h3><span class="bye">Byes: UCLA D, UCLA B</span></header><ol class="games"><li class="game"><div class="room">3421 · Janice</div>
+<div class="row w"><span class="team y">Claremont A</span><b class="sc">285</b></div>
+<div class="row"><span class="team y">UCLA C</span><b class="sc">250</b></div>
+<div class="pr lean"><span class="bar" style="--p:58%"></span><span>Slight edge · 58%</span></div></li><li class="game"><div class="room">3425 · Nolan</div>
+<div class="row w"><span class="team y">UCLA A</span><b class="sc">130</b></div>
+<div class="row"><span class="team y">Claremont B</span><b class="sc">120</b></div>
+<div class="pr toss"><span class="bar" style="--p:54%"></span><span>Toss-up · 54%</span></div></li><li class="game"><div class="room">3461 · Jas</div>
+<div class="row w"><span class="team y">USC</span><b class="sc">305</b></div>
+<div class="row"><span class="team y">UCSD C</span><b class="sc">60</b></div>
+<div class="pr lock"><span class="bar" style="--p:97%"></span><span>Heavy favorite · 97%</span></div></li><li class="game"><div class="room">3465 · Jason</div>
+<div class="row w"><span class="team l">UCLA E</span><b class="sc">295</b></div>
+<div class="row"><span class="team l">UCSB</span><b class="sc">75</b></div>
+<div class="pr lock"><span class="bar" style="--p:97%"></span><span>Heavy favorite · 97%</span></div></li><li class="game"><div class="room">3481 · Ethan</div>
+<div class="row w"><span class="team l">Caltech</span><b class="sc">450</b></div>
+<div class="row"><span class="team l">UCI</span><b class="sc">65</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li><li class="game"><div class="room">3460 · Adam</div>
+<div class="row w"><span class="team l">UCSD B</span><b class="sc">305</b></div>
+<div class="row"><span class="team l">UCSD A</span><b class="sc">230</b></div>
+<div class="pr fav"><span class="bar" style="--p:70%"></span><span>Favorite · 70%</span></div></li></ol></section><section class="round"><header><h3>Round 5</h3><span class="bye">Byes: UCSD C, UCSD A</span></header><ol class="games"><li class="game"><div class="room">3421 · Janice</div>
+<div class="row w"><span class="team y">USC</span><b class="sc">410</b></div>
+<div class="row"><span class="team y">Claremont B</span><b class="sc">75</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li><li class="game"><div class="room">3425 · Nolan</div>
+<div class="row w"><span class="team y">Claremont A</span><b class="sc">430</b></div>
+<div class="row"><span class="team y">UCLA A</span><b class="sc">90</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li><li class="game"><div class="room">3461 · Jas</div>
+<div class="row w"><span class="team y">UCLA C</span><b class="sc">335</b></div>
+<div class="row"><span class="team y">UCLA D</span><b class="sc">240</b></div>
+<div class="pr fav"><span class="bar" style="--p:75%"></span><span>Favorite · 75%</span></div></li><li class="game"><div class="room">3465 · Jason</div>
+<div class="row w"><span class="team l">UCSD B</span><b class="sc">320</b></div>
+<div class="row"><span class="team l">Caltech</span><b class="sc">305</b></div>
+<div class="pr toss"><span class="bar" style="--p:55%"></span><span>Toss-up · 55%</span></div></li><li class="game"><div class="room">3481 · Ethan</div>
+<div class="row w"><span class="team l">UCSB</span><b class="sc">250</b></div>
+<div class="row"><span class="team l">UCI</span><b class="sc">140</b></div>
+<div class="pr fav"><span class="bar" style="--p:89%"></span><span>Favorite · 89%</span></div></li><li class="game"><div class="room">3460 · Adam</div>
+<div class="row w"><span class="team l">UCLA B</span><b class="sc">335</b></div>
+<div class="row"><span class="team l">UCLA E</span><b class="sc">190</b></div>
+<div class="pr fav"><span class="bar" style="--p:85%"></span><span>Favorite · 85%</span></div></li></ol></section><section class="round"><header><h3>Round 6</h3><span class="bye">Byes: Claremont B, Caltech</span></header><ol class="games"><li class="game"><div class="room">3421 · Janice</div>
+<div class="row w"><span class="team y">Claremont A</span><b class="sc">380</b></div>
+<div class="row"><span class="team y">UCSD C</span><b class="sc">120</b></div>
+<div class="pr lock"><span class="bar" style="--p:98%"></span><span>Heavy favorite · 98%</span></div></li><li class="game"><div class="room">3425 · Nolan</div>
+<div class="row w"><span class="team y">USC</span><b class="sc">320</b></div>
+<div class="row"><span class="team y">UCLA D</span><b class="sc">210</b></div>
+<div class="pr fav"><span class="bar" style="--p:78%"></span><span>Favorite · 78%</span></div></li><li class="game"><div class="room">3461 · Jas</div>
+<div class="row w"><span class="team y">UCLA C</span><b class="sc">385</b></div>
+<div class="row"><span class="team y">UCLA A</span><b class="sc">60</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li><li class="game"><div class="room">3465 · Jason</div>
+<div class="row w"><span class="team l">UCSD A</span><b class="sc">335</b></div>
+<div class="row"><span class="team l">UCSB</span><b class="sc">105</b></div>
+<div class="pr lock"><span class="bar" style="--p:98%"></span><span>Heavy favorite · 98%</span></div></li><li class="game"><div class="room">3481 · Ethan</div>
+<div class="row w"><span class="team l">UCLA B</span><b class="sc">310</b></div>
+<div class="row"><span class="team l">UCSD B</span><b class="sc">255</b></div>
+<div class="pr lean"><span class="bar" style="--p:64%"></span><span>Slight edge · 64%</span></div></li><li class="game"><div class="room">3460 · Adam</div>
+<div class="row w"><span class="team l">UCLA E</span><b class="sc">365</b></div>
+<div class="row"><span class="team l">UCI</span><b class="sc">45</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li></ol></section><section class="round"><header><h3>Round 7</h3><span class="bye">Byes: Claremont A, UCSB</span></header><ol class="games"><li class="game"><div class="room">3421 · Janice</div>
+<div class="row w"><span class="team y">UCLA D</span><b class="sc">340</b></div>
+<div class="row"><span class="team y">Claremont B</span><b class="sc">85</b></div>
+<div class="pr lock"><span class="bar" style="--p:99%"></span><span>Heavy favorite · 99%</span></div></li><li class="game"><div class="room">3425 · Nolan</div>
+<div class="row w"><span class="team y">UCLA C</span><b class="sc">365</b></div>
+<div class="row"><span class="team y">UCSD C</span><b class="sc">130</b></div>
+<div class="pr lock"><span class="bar" style="--p:97%"></span><span>Heavy favorite · 97%</span></div></li><li class="game"><div class="room">3461 · Jas</div>
+<div class="row w"><span class="team y">USC</span><b class="sc">400</b></div>
+<div class="row"><span class="team y">UCLA A</span><b class="sc">75</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li><li class="game"><div class="room">3465 · Jason</div>
+<div class="row w"><span class="team l">UCLA B</span><b class="sc">310</b></div>
+<div class="row"><span class="team l">Caltech</span><b class="sc">230</b></div>
+<div class="pr fav"><span class="bar" style="--p:71%"></span><span>Favorite · 71%</span></div></li><li class="game"><div class="room">3481 · Ethan</div>
+<div class="row w"><span class="team l">UCSD A</span><b class="sc">230</b></div>
+<div class="row"><span class="team l">UCLA E</span><b class="sc">225</b></div>
+<div class="pr toss"><span class="bar" style="--p:51%"></span><span>Toss-up · 51%</span></div></li><li class="game"><div class="room">3460 · Adam</div>
+<div class="row w"><span class="team l">UCSD B</span><b class="sc">410</b></div>
+<div class="row"><span class="team l">UCI</span><b class="sc">55</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li></ol></section></div></section>
+
+<section id="playoffs"><div class="sec-head"><h2>Playoffs</h2><p>Assumes the projected seeds above. Top bracket (Y1–3, L1–3) plays a full round robin; bottom bracket (Y4–7, L4–7) crosses over.</p></div>
+<div class="rounds"><section class="round"><header><h3>Playoff round 1</h3><span class="bye">First three games: top bracket. Rest: bottom bracket.</span></header><ol class="games"><li class="game"><div class="room">3421 · Janice</div>
+<div class="row w"><span class="team y"><span class="sd">Y2</span>USC</span><b class="sc">300</b></div>
+<div class="row"><span class="team l"><span class="sd">L3</span>Caltech</span><b class="sc">275</b></div>
+<div class="pr toss"><span class="bar" style="--p:56%"></span><span>Toss-up · 56%</span></div></li><li class="game"><div class="room">3425 · Nolan</div>
+<div class="row w"><span class="team l"><span class="sd">L2</span>UCSD B</span><b class="sc">325</b></div>
+<div class="row"><span class="team y"><span class="sd">Y3</span>UCLA C</span><b class="sc">315</b></div>
+<div class="pr toss"><span class="bar" style="--p:52%"></span><span>Toss-up · 52%</span></div></li><li class="game"><div class="room">3461 · Jas</div>
+<div class="row w"><span class="team l"><span class="sd">L1</span>UCLA B</span><b class="sc">275</b></div>
+<div class="row"><span class="team y"><span class="sd">Y1</span>Claremont A</span><b class="sc">245</b></div>
+<div class="pr lean"><span class="bar" style="--p:58%"></span><span>Slight edge · 58%</span></div></li><li class="game"><div class="room">3465 · Jason</div>
+<div class="row w"><span class="team l"><span class="sd">L4</span>UCSD A</span><b class="sc">255</b></div>
+<div class="row"><span class="team y"><span class="sd">Y4</span>UCLA D</span><b class="sc">235</b></div>
+<div class="pr toss"><span class="bar" style="--p:57%"></span><span>Toss-up · 57%</span></div></li><li class="game"><div class="room">3481 · Ethan</div>
+<div class="row w"><span class="team y"><span class="sd">Y5</span>UCSD C</span><b class="sc">220</b></div>
+<div class="row"><span class="team l"><span class="sd">L7</span>UCI</span><b class="sc">45</b></div>
+<div class="pr lock"><span class="bar" style="--p:97%"></span><span>Heavy favorite · 97%</span></div></li><li class="game"><div class="room">3460 · Adam</div>
+<div class="row w"><span class="team l"><span class="sd">L6</span>UCSB</span><b class="sc">180</b></div>
+<div class="row"><span class="team y"><span class="sd">Y6</span>UCLA A</span><b class="sc">145</b></div>
+<div class="pr lean"><span class="bar" style="--p:65%"></span><span>Slight edge · 65%</span></div></li><li class="game"><div class="room">3466 · Anderson</div>
+<div class="row w"><span class="team l"><span class="sd">L5</span>UCLA E</span><b class="sc">350</b></div>
+<div class="row"><span class="team y"><span class="sd">Y7</span>Claremont B</span><b class="sc">85</b></div>
+<div class="pr lock"><span class="bar" style="--p:99%"></span><span>Heavy favorite · 99%</span></div></li></ol></section><section class="round"><header><h3>Playoff round 2</h3><span class="bye">First three games: top bracket. Rest: bottom bracket.</span></header><ol class="games"><li class="game"><div class="room">3421 · Janice</div>
+<div class="row w"><span class="team y"><span class="sd">Y2</span>USC</span><b class="sc">300</b></div>
+<div class="row"><span class="team l"><span class="sd">L2</span>UCSD B</span><b class="sc">290</b></div>
+<div class="pr toss"><span class="bar" style="--p:52%"></span><span>Toss-up · 52%</span></div></li><li class="game"><div class="room">3425 · Nolan</div>
+<div class="row w"><span class="team y"><span class="sd">Y1</span>Claremont A</span><b class="sc">310</b></div>
+<div class="row"><span class="team l"><span class="sd">L3</span>Caltech</span><b class="sc">265</b></div>
+<div class="pr lean"><span class="bar" style="--p:62%"></span><span>Slight edge · 62%</span></div></li><li class="game"><div class="room">3461 · Jas</div>
+<div class="row w"><span class="team l"><span class="sd">L1</span>UCLA B</span><b class="sc">335</b></div>
+<div class="row"><span class="team y"><span class="sd">Y3</span>UCLA C</span><b class="sc">265</b></div>
+<div class="pr lean"><span class="bar" style="--p:69%"></span><span>Slight edge · 69%</span></div></li><li class="game"><div class="room">3465 · Jason</div>
+<div class="row w"><span class="team l"><span class="sd">L5</span>UCLA E</span><b class="sc">315</b></div>
+<div class="row"><span class="team y"><span class="sd">Y4</span>UCLA D</span><b class="sc">300</b></div>
+<div class="pr toss"><span class="bar" style="--p:54%"></span><span>Toss-up · 54%</span></div></li><li class="game"><div class="room">3481 · Ethan</div>
+<div class="row w"><span class="team l"><span class="sd">L4</span>UCSD A</span><b class="sc">340</b></div>
+<div class="row"><span class="team y"><span class="sd">Y5</span>UCSD C</span><b class="sc">165</b></div>
+<div class="pr lock"><span class="bar" style="--p:92%"></span><span>Heavy favorite · 92%</span></div></li><li class="game"><div class="room">3460 · Adam</div>
+<div class="row w"><span class="team y"><span class="sd">Y6</span>UCLA A</span><b class="sc">175</b></div>
+<div class="row"><span class="team l"><span class="sd">L7</span>UCI</span><b class="sc">100</b></div>
+<div class="pr fav"><span class="bar" style="--p:82%"></span><span>Favorite · 82%</span></div></li><li class="game"><div class="room">3466 · Anderson</div>
+<div class="row w"><span class="team l"><span class="sd">L6</span>UCSB</span><b class="sc">165</b></div>
+<div class="row"><span class="team y"><span class="sd">Y7</span>Claremont B</span><b class="sc">120</b></div>
+<div class="pr lean"><span class="bar" style="--p:69%"></span><span>Slight edge · 69%</span></div></li></ol></section><section class="round"><header><h3>Playoff round 3</h3><span class="bye">First three games: top bracket. Rest: bottom bracket.</span></header><ol class="games"><li class="game"><div class="room">3421 · Janice</div>
+<div class="row w"><span class="team l"><span class="sd">L1</span>UCLA B</span><b class="sc">310</b></div>
+<div class="row"><span class="team l"><span class="sd">L2</span>UCSD B</span><b class="sc">255</b></div>
+<div class="pr lean"><span class="bar" style="--p:64%"></span><span>Slight edge · 64%</span></div></li><li class="game"><div class="room">3425 · Nolan</div>
+<div class="row w"><span class="team y"><span class="sd">Y3</span>UCLA C</span><b class="sc">310</b></div>
+<div class="row"><span class="team l"><span class="sd">L3</span>Caltech</span><b class="sc">300</b></div>
+<div class="pr toss"><span class="bar" style="--p:53%"></span><span>Toss-up · 53%</span></div></li><li class="game"><div class="room">3461 · Jas</div>
+<div class="row w"><span class="team y"><span class="sd">Y1</span>Claremont A</span><b class="sc">310</b></div>
+<div class="row"><span class="team y"><span class="sd">Y2</span>USC</span><b class="sc">295</b></div>
+<div class="pr toss"><span class="bar" style="--p:54%"></span><span>Toss-up · 54%</span></div></li><li class="game"><div class="room">3465 · Jason</div>
+<div class="row w"><span class="team y"><span class="sd">Y4</span>UCLA D</span><b class="sc">345</b></div>
+<div class="row"><span class="team l"><span class="sd">L6</span>UCSB</span><b class="sc">130</b></div>
+<div class="pr lock"><span class="bar" style="--p:97%"></span><span>Heavy favorite · 97%</span></div></li><li class="game"><div class="room">3481 · Ethan</div>
+<div class="row w"><span class="team l"><span class="sd">L5</span>UCLA E</span><b class="sc">340</b></div>
+<div class="row"><span class="team y"><span class="sd">Y5</span>UCSD C</span><b class="sc">175</b></div>
+<div class="pr lock"><span class="bar" style="--p:91%"></span><span>Heavy favorite · 91%</span></div></li><li class="game"><div class="room">3460 · Adam</div>
+<div class="row w"><span class="team l"><span class="sd">L4</span>UCSD A</span><b class="sc">350</b></div>
+<div class="row"><span class="team y"><span class="sd">Y6</span>UCLA A</span><b class="sc">90</b></div>
+<div class="pr lock"><span class="bar" style="--p:99%"></span><span>Heavy favorite · 99%</span></div></li><li class="game"><div class="room">3466 · Anderson</div>
+<div class="row w"><span class="team y"><span class="sd">Y7</span>Claremont B</span><b class="sc">170</b></div>
+<div class="row"><span class="team l"><span class="sd">L7</span>UCI</span><b class="sc">110</b></div>
+<div class="pr fav"><span class="bar" style="--p:78%"></span><span>Favorite · 78%</span></div></li></ol></section><section class="round"><header><h3>Playoff round 4</h3><span class="bye">First three games: top bracket. Rest: bottom bracket.</span></header><ol class="games"><li class="game"><div class="room">3421 · Janice</div>
+<div class="row w"><span class="team l"><span class="sd">L1</span>UCLA B</span><b class="sc">295</b></div>
+<div class="row"><span class="team l"><span class="sd">L3</span>Caltech</span><b class="sc">215</b></div>
+<div class="pr fav"><span class="bar" style="--p:72%"></span><span>Favorite · 72%</span></div></li><li class="game"><div class="room">3425 · Nolan</div>
+<div class="row w"><span class="team y"><span class="sd">Y1</span>Claremont A</span><b class="sc">300</b></div>
+<div class="row"><span class="team l"><span class="sd">L2</span>UCSD B</span><b class="sc">275</b></div>
+<div class="pr toss"><span class="bar" style="--p:56%"></span><span>Toss-up · 56%</span></div></li><li class="game"><div class="room">3461 · Jas</div>
+<div class="row w"><span class="team y"><span class="sd">Y2</span>USC</span><b class="sc">300</b></div>
+<div class="row"><span class="team y"><span class="sd">Y3</span>UCLA C</span><b class="sc">285</b></div>
+<div class="pr toss"><span class="bar" style="--p:54%"></span><span>Toss-up · 54%</span></div></li><li class="game"><div class="room">3465 · Jason</div>
+<div class="row w"><span class="team y"><span class="sd">Y4</span>UCLA D</span><b class="sc">360</b></div>
+<div class="row"><span class="team l"><span class="sd">L7</span>UCI</span><b class="sc">45</b></div>
+<div class="pr lock"><span class="bar" style="--p:100%"></span><span>Heavy favorite · 100%</span></div></li><li class="game"><div class="room">3481 · Ethan</div>
+<div class="row w"><span class="team y"><span class="sd">Y5</span>UCSD C</span><b class="sc">245</b></div>
+<div class="row"><span class="team l"><span class="sd">L6</span>UCSB</span><b class="sc">180</b></div>
+<div class="pr fav"><span class="bar" style="--p:73%"></span><span>Favorite · 73%</span></div></li><li class="game"><div class="room">3460 · Adam</div>
+<div class="row w"><span class="team l"><span class="sd">L5</span>UCLA E</span><b class="sc">345</b></div>
+<div class="row"><span class="team y"><span class="sd">Y6</span>UCLA A</span><b class="sc">90</b></div>
+<div class="pr lock"><span class="bar" style="--p:99%"></span><span>Heavy favorite · 99%</span></div></li><li class="game"><div class="room">3466 · Anderson</div>
+<div class="row w"><span class="team l"><span class="sd">L4</span>UCSD A</span><b class="sc">330</b></div>
+<div class="row"><span class="team y"><span class="sd">Y7</span>Claremont B</span><b class="sc">50</b></div>
+<div class="pr lock"><span class="bar" style="--p:99%"></span><span>Heavy favorite · 99%</span></div></li></ol></section><section class="round"><header><h3>Playoff round 5</h3><span class="bye">Top bracket only</span></header><ol class="games"><li class="game"><div class="room">3421 · Janice</div>
+<div class="row w"><span class="team y"><span class="sd">Y1</span>Claremont A</span><b class="sc">345</b></div>
+<div class="row"><span class="team y"><span class="sd">Y3</span>UCLA C</span><b class="sc">310</b></div>
+<div class="pr lean"><span class="bar" style="--p:60%"></span><span>Slight edge · 60%</span></div></li><li class="game"><div class="room">3425 · Nolan</div>
+<div class="row w"><span class="team l"><span class="sd">L1</span>UCLA B</span><b class="sc">325</b></div>
+<div class="row"><span class="team y"><span class="sd">Y2</span>USC</span><b class="sc">270</b></div>
+<div class="pr lean"><span class="bar" style="--p:65%"></span><span>Slight edge · 65%</span></div></li><li class="game"><div class="room">3461 · Jas</div>
+<div class="row w"><span class="team l"><span class="sd">L2</span>UCSD B</span><b class="sc">320</b></div>
+<div class="row"><span class="team l"><span class="sd">L3</span>Caltech</span><b class="sc">305</b></div>
+<div class="pr toss"><span class="bar" style="--p:54%"></span><span>Toss-up · 54%</span></div></li></ol></section></div></section>
+
+<section id="method" class="notes card"><h3>How it works</h3>
+<p>Each player has an ability estimated from fall 2026 results (Terrapin Open @ USC, ACF Fall @ Claremont, BRUIN V: MONSTER @ UCLA) and 2025–26 season stats, fit on the actual teams they played on so that teammates sharing tossups is accounted for.</p>
+<p>In a game, each team's chance to win a tossup grows with its players' combined ability, with diminishing returns as teammates overlap; some tossups go dead. Bonus conversion is fit to team PPB at MONSTER. Negs use each player's own neg rate. The four strongest players on each roster play every game.</p>
+<p>Prelim standings: wins, then points per game. Top bracket ranks on playoff games only; bottom bracket carries over prelim games between bracket-mates. Players with no record are treated as a typical new player, and set difficulty is assumed to be MONSTER-level.</p></section>
+</div>
+</body>
+</html>
